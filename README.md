@@ -1,48 +1,46 @@
-# avue-cli
+# ptadmin
 
-这是基于vue-cli@3.0改的一个脚手架  
+### 说明：
 
-## Run vueUI
-* 1.npm install -g @vue/cli  全局安装vue脚手架最新版
-* 2.vue --version 查看版本是否为3.x版本
-* 3.vue-ui 运行管理工具，导入avue-cli项目
-* 4.剩下的自己摸索吧，下面时图示
+- 基于thinkphp架构的自动生成接口的框架
 
-![图例1](https://gitee.wang/avue/avue-cli/raw/master/public/img/mock/cli/1.png)  
-![图例2](https://gitee.wang/avue/avue-cli/raw/master/public/img/mock/cli/2.png)  
-![图例3](https://gitee.wang/avue/avue-cli/raw/master/public/img/mock/cli/3.png)  
+### 数据接口:
 
-## Run setup
-```
-cd avue-cli
-```
+等待更新
 
-## Project setup
-```
-npm install
-```
+### 目录结构:
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- admin — 客户端后台管理系统
+- sever - 服务端，基于thinkphp的后台开发
+- ptadmin.sql - mysql的sql 语句
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 模块分析：
+ 1. 数据库
+    - 新建数据库
+    - 管理数据库
+ 2. 数据词典
+    - 新建数据词典
+    - 管理数据词典
+ 3. 信息
+    - 管理信息  
+ 4. 用户
+    - 用户管理
+    - 角色管理
+    - 机构管理
+ 5. 模板
+    - 采集管理
+    - 模板管理
+ 6. 系统
+    - 邮箱管理
+    - 短信管理
+    - 图片验证码管理
 
-### Lints and fixes files
-```
-npm run lint
-```
+### 代码使用：
+-  platform/src/page/index/top/top-menu.vue 此处修改了平台的头部
+-  platform/src/mock/menu.js 此处修改平台的侧边栏
+-  platform/src/router/views/index.js 此处添加路由，方便跳转
+### 源码地址：
 
-### Run your unit tests
-```
-npm run test:unit
-```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+
+
