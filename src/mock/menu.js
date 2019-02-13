@@ -5,18 +5,20 @@ const top = [{
     icon: 'el-icon-menu',
     parentId: 0
 },
-{
-    label: "官网",
-    icon: 'el-icon-document',
-    path: "https://avuex.avue.top",
-    parentId: 1
-},
-{
-    label: "测试",
-    icon: 'el-icon-document',
-    path: "https://avuex.avue.top",
-    parentId: 2
-}]
+// {
+//     label: "官网",
+//     icon: 'el-icon-document',
+//     path: "https://avuex.avue.top",
+//     parentId: 1
+// },
+// {
+//     label: "测试",
+//     icon: 'el-icon-document',
+//     path: "https://avuex.avue.top",
+//     parentId: 2
+// }
+]
+
 const first = [{
     label: "数据库",
     path: '/database',
