@@ -45,8 +45,8 @@ const first = [{
     icon: 'icon-caidan',
     children: [{
             label: "管理用户",
-            path: '/userList',
-            component: 'views/wel',
+            path: 'userList',
+            component: 'views/usermanage/index',
             icon: 'icon-caidan',
             children: []
         },

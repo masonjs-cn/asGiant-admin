@@ -18,7 +18,6 @@
 <script>
 import * as Column from '@/api/column'
 import * as dataCenter from '@/api/dataCenter'
-// import * as databaseLogic from '@/network/model/databaseLogic'
 import {pageConfig} from './pageConfig'
 export default {
   data () {

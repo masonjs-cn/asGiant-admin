@@ -7,8 +7,9 @@ export const CheckTableList = (page) => request({
     data: page
 })
 
+// 查询表
 export const CheckTable = (page) => request({
-    url: 'admin/Column/CheckTable',
+    url: 'api/Column/CheckTable',
     method: 'post',
     data: page
 });

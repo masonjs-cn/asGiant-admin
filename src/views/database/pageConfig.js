@@ -32,9 +32,6 @@ export let pageConfig = {
   {
     label: '数据编号',
     prop: 'columnid',
-    maxRow: 4,
-    minRow: 4,
-    span: 20,
     disabled: true,
     addDisplay: false,
     editDisplay: false,
