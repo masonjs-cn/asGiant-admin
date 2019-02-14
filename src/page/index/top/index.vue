@@ -68,7 +68,7 @@
       </el-tooltip>
       <el-dropdown>
         <span class="el-dropdown-link">
-          {{userInfo.username}}
+          {{userInfos.userName}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -94,6 +94,9 @@ import topSearch from "./top-search";
 import topTheme from "./top-theme";
 import topLogs from "./top-logs";
 import topColor from "./top-color";
+import {
+  getStore
+} from '@/util/store'
 export default {
   components: {
     topLock,
@@ -105,12 +108,23 @@ export default {
   },
   name: "top",
   data() {
-    return {};
+    return {
+      userInfos:{}
+    };
   },
   filters: {},
   created() {},
   mounted() {
     listenfullscreen(this.setScreen);
+    if (this.userInfos||this.userInfos.userName===undefined) {
+        let a= getStore({ name: 'userInfos' }) || []
+        this.userInfos=a;
+        if (!a||a.length===0) {
+        this.$store.dispatch("LogOut").then(() => {
+          this.$router.push({ path: "/login" });
+        });
+      }
+    }
   },
   computed: {
     ...mapState({

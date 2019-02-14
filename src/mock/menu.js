@@ -26,14 +26,14 @@ const first = [{
     children: [
         {
             label: "数据库管理",
-            path: '/databaseList',
-            component: 'views/wel',
+            path: 'databaseList',
+            component: 'views/database/index',
             icon: 'icon-caidan',
             children: []
         },
         {
             label: "字段管理",
-            path: '/fieldList',
+            path: 'fieldList',
             component: 'views/wel',
             icon: 'icon-caidan',
             children: []

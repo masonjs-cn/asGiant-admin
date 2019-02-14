@@ -5,10 +5,10 @@
            ref="loginForm"
            :model="loginForm"
            label-width="0">
-    <el-form-item prop="username">
+    <el-form-item prop="userName">
       <el-input size="small"
                 @keyup.enter.native="handleLogin"
-                v-model="loginForm.username"
+                v-model="loginForm.userName"
                 auto-complete="off"
                 placeholder="请输入用户名">
         <i slot="prefix"
@@ -44,13 +44,14 @@
         </el-col>
         <el-col :span="8">
           <div class="login-code">
-            <span class="login-code-img"
+            <!-- <span class="login-code-img"
                   @click="refreshCode"
-                  v-if="code.type == 'text'">{{code.value}}</span>
-            <img :src="code.src"
+                  v-if="code.type == 'text'">{{code.value}}</span> -->
+            <img :src="imgsrc"
+                 ref="img"
                  class="login-code-img"
                  @click="refreshCode"
-                 v-else />
+            />
             <!-- <i class="icon-shuaxin login-code-icon" @click="refreshCode"></i> -->
           </div>
         </el-col>
@@ -68,21 +69,24 @@
 </template>
 
 <script>
-import { isvalidUsername } from "@/util/validate";
-import { randomLenNum } from "@/util/util";
+// import { isvalidUsername } from "@/util/validate";
+// import { randomLenNum } from "@/util/util";
 import { mapGetters } from "vuex";
+import * as people from '@/api/people'
 export default {
   name: "userlogin",
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
+      // if (!isvalidUsername(value)) {
+      if (value=="") {
         callback(new Error("请输入正确的用户名"));
       } else {
         callback();
       }
     };
     const validateCode = (rule, value, callback) => {
-      if (this.code.value != value) {
+      if (value=="") {
+      // if (this.code.value != value) {
         this.loginForm.code = "";
         this.refreshCode();
         callback(new Error("请输入正确的验证码"));
@@ -91,8 +95,9 @@ export default {
       }
     };
     return {
+      imgsrc:'',
       loginForm: {
-        username: "admin",
+        userName: "小吴",
         password: "123456",
         code: "",
         redomStr: ""
@@ -105,7 +110,7 @@ export default {
         type: "text"
       },
       loginRules: {
-        username: [
+        userName: [
           { required: true, trigger: "blur", validator: validateUsername }
         ],
         password: [
@@ -122,6 +127,7 @@ export default {
     };
   },
   created() {
+    this.imgsrc='api/Code/ImageCode';
     this.refreshCode();
   },
   mounted() {},
@@ -131,11 +137,12 @@ export default {
   props: [],
   methods: {
     refreshCode() {
-      this.loginForm.redomStr = randomLenNum(this.code.len, true);
-      this.code.type == "text"
-        ? (this.code.value = randomLenNum(this.code.len))
-        : (this.code.src = `${this.codeUrl}/${this.loginForm.redomStr}`);
-      this.loginForm.code = this.code.value;
+      // this.loginForm.redomStr = randomLenNum(this.code.len, true);
+      // this.code.type == "text"
+      //   ? (this.code.value = randomLenNum(this.code.len))
+      //   : (this.code.src = `${this.codeUrl}/${this.loginForm.redomStr}`);
+      this.loginForm.code = '';
+      this.$refs.img.src = 'api/Code/ImageCode';
     },
     showPassword() {
       this.passwordType == ""
@@ -145,9 +152,24 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$store.dispatch("LoginByUsername", this.loginForm).then(() => {
-            this.$router.push({ path: this.tagWel.value });
-          });
+          people.loginUserName(this.loginForm)
+          .then(res=>{
+            if (res.data.flag==1) {
+                this.$store.dispatch("LoginByUsername", res.data).then(() => {
+                  this.$router.push({ path: this.tagWel.value });
+                });
+                return
+            }
+
+            this.$message({
+              type: 'error',
+              message: res.data.msg
+            });
+
+          })
+          // this.$store.dispatch("LoginByUsername", this.loginForm).then(() => {
+          //   this.$router.push({ path: this.tagWel.value });
+          // });
         }
       });
     }

@@ -1,32 +1,38 @@
 import request from '@/router/axios';
-import { baseUrl } from '@/config/env';
+// import { baseUrl } from '@/config/env';
 
-export const registered = () => request({
-    url: baseUrl + 'admin/Info/updateInfos',
-    method: 'post'
+export const registered = (page) => request({
+    url: 'api/Info/updateInfos',
+    method: 'post',
+    data:page
 });
 
-export const registeredUser = () => request({
-    url: baseUrl + 'admin/People/registeredUser',
-    method: 'post'
+export const registeredUser = (page) => request({
+    url: 'api/People/registeredUser',
+    method: 'post',
+    data:page
 });
 
-export const loginTel = () => request({
-    url: baseUrl + 'admin/People/loginTel',
-    method: 'post'
+export const loginTel = (page) => request({
+    url: 'api/People/loginTel',
+    method: 'post',
+    data:page
 });
 
-export const loginEmail = () => request({
-    url: baseUrl + 'admin/People/loginEmail',
-    method: 'post'
+export const loginEmail = (page) => request({
+    url: 'api/People/loginEmail',
+    method: 'post',
+    data:page
 });
 
-export const loginUserName = () => request({
-    url: baseUrl + 'admin/People/loginUserName',
-    method: 'post'
+export const loginUserName = (page) => request({
+    url: 'api/People/loginUserName',
+    method: 'post',
+    data:page
 });
 
-export const loginImg = () => request({
-    url: baseUrl + 'admin/Code/ImageCode',
-    method: 'post'
+export const loginImg = (page) => request({
+    url: 'api/Code/ImageCode',
+    method: 'post',
+    data:page
 });
