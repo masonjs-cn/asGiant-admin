@@ -1,21 +1,23 @@
 <template>
   <section>
     <el-card class="box-card tableField">
-      <h4 class="title">{{columnName}}</h4>
-       <avue-crud :data="data"
-                  :option="option"
-                  :table-loading="tableLoading"
-                  @row-save="handleSave"
-                  @row-update="handleUpdate"
-                  @refresh-change="handlerefreshChange"
-                  @row-del="handleDel"
-                >
+      <h4 class="title">{{columnName}}栏目</h4>
+       <avue-crud :option="option"
+                 :data="data" 
+                 @on-load="onLoad"
+                 @row-save="handleSave"
+                 @row-del="handleDel"
+                 :table-loading="tableLoading"
+                 @refresh-change="refreshChange"
+                 @row-dblclick="handleRowClick">
       </avue-crud>
     </el-card>
   </section>
 </template>
 
 <script>
+import * as Info from '@/api/info'
+import * as sysJson from '@/const/sysJson'
 // import * as databaseLogic from '@/network/model/databaseLogic'
 import {pageConfig} from './pageConfig'
 export default {
@@ -25,10 +27,7 @@ export default {
       columnid: '',
       columnName: '',
       tableLoading: false,
-      data: [{
-        nickname: '张三',
-        ipone: '111'
-      }],
+      data: [],
       option: pageConfig
     }
   },
@@ -39,17 +38,23 @@ export default {
     this.loadTableFieldList()
   },
   methods: {
+    // 加载函数
+    onLoad() {
+      this.loadTableFieldList()
+    },
     loadTableFieldList () {
       this.tableLoading = true
       let data = {
         infoJson: {
           'table_form': this.column
-        }
+        },
+        classid :sysJson.sysClassid.programClassid
       }
-      // databaseLogic.programList(data, res => {
-      //   this.data = res.msg
-      //   this.tableLoading = false
-      // })
+      Info.checkField(data)
+      .then(res => {
+        this.data = res.data.msg
+        this.tableLoading = false
+      })
     },
     /**
      * @title 打开新增窗口

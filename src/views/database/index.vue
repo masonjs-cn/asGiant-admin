@@ -12,8 +12,8 @@
                  @row-dblclick="handleRowClick">
 
         <template slot-scope="scope" slot="menu">
-              <el-button size="small" type="text"
-                        @click.stop="edit(scope.row,scope.index)">修改</el-button>
+              <el-button size="small" type="text" icon="el-icon-edit"
+                        @click.stop="edit(scope.row,scope.index)">编辑</el-button>
         </template>
 
       </avue-crud>
@@ -205,7 +205,14 @@ export default {
     },
     handleRowClick (row) {
       if (!this.getTableRole(row)) {return}
-      this.$router.push({path:'/fieldlist',query:{columnid:row.$columnid}})
+      this.$router.push({
+        path:'/fieldlist',
+        query:{
+          column:row.$column,
+          columnid:row.$columnid,
+          columnName:row.$columnName,
+        }
+      })
     }
   }
 }

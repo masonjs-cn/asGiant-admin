@@ -1,12 +1,13 @@
-let pageConfig = {
+export let pageConfig = {
   page: false,
   menuAlign: 'center',
+  align: 'center',
   border: true,
   index: true,
+  filterBtn: false,
   column: [{
     label: '排序',
     prop: 'sort',
-    span: 20,
     rules: [{
       required: true,
       message: '请输入排序',
@@ -17,8 +18,8 @@ let pageConfig = {
   {
     label: '字段',
     prop: 'field',
-    span: 20,
     placeholder: '请输入字段名',
+    width: 100,
     rules: [{
       required: true,
       message: '数据库名不能为空',
@@ -26,10 +27,20 @@ let pageConfig = {
     }]
   },
   {
+    label: '字段名',
+    prop: 'field_annotation',
+    width: 100,
+    rules: [{
+      required: true,
+      message: '数据库中文名不能为空',
+      trigger: 'blur'
+    }]
+  },
+  {
     label: '字段类型',
     prop: 'fieldType',
-    span: 20,
     type: 'select',
+    width: 200,
     dicData: [{
       label: 'varchar(字符型0-255字节)',
       value: 'varchar'
@@ -76,26 +87,30 @@ let pageConfig = {
   {
     label: '字段大小',
     prop: 'fieldSize',
-    span: 20,
     rules: [{
       required: true,
       message: '请输入字段大小',
       trigger: 'blur'
     }]
+  }, {
+    label: '表格宽度',
+    prop: 'width'
+  }, {
+    label: '表格高度',
+    prop: 'height'
+  }, {
+    label: '栅格化',
+    prop: 'span',
+    width: 100,
+  }, {
+    label: '输入类型',
+    prop: 'type',
+    width: 100
   },
-  {
-    label: '说明',
-    prop: 'field_annotation',
-    span: 20,
-    rules: [{
-      required: true,
-      message: '数据库中文名不能为空',
-      trigger: 'blur'
-    }]
-  }
-  ]
-}
-
-export {
-  pageConfig
+   {
+     label: '规则',
+     prop: 'rules',
+     width: 100
+   }
+ ]
 }

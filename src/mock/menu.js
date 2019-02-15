@@ -23,43 +23,43 @@ const first = [{
     label: "数据库",
     path: '/database',
     component: 'views/database/index',
-    icon: 'icon-caidan',
+    icon: 'icon-shujuku',
     children: []
 }, {
     label: "用户管理",
     path: '/user',
-    icon: 'icon-caidan',
+    icon: 'icon-usergroup',
     children: [{
             label: "管理用户",
             path: 'userList',
             component: 'views/usermanage/index',
-            icon: 'icon-caidan',
+            icon: 'icon-yonghu',
             children: []
         },
         {
             label: "角色管理",
             path: '/roleList',
             component: 'views/wel',
-            icon: 'icon-caidan',
+            icon: 'icon-role',
             children: []
         }]
 },{
     label: "附件管理",
     path: '/attachment',
     component: 'views/wel',
-    icon: 'icon-caidan',
+    icon: 'icon-fujianguanli',
     children: []
 },{
     label: "邮箱管理",
     path: '/email',
     component: 'views/wel',
-    icon: 'icon-caidan',
+    icon: 'icon-youxiang',
     children: []
 },{
     label: "短信管理",
     path: '/sms',
     component: 'views/wel',
-    icon: 'icon-caidan',
+    icon: 'icon-duanxin',
     children: []
 },]
 

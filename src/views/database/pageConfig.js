@@ -4,6 +4,7 @@ export let pageConfig = {
   border: true,
   index: true,
   editBtn: false,
+  filterBtn: false,
   column: [{
     label: '数据库名',
     prop: 'column',
