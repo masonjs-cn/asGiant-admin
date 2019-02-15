@@ -1,5 +1,23 @@
+<template>
+  <section>
+    <el-card class="box-card tableField">
+      <h4 class="title">{{columnName}}</h4>
+       <avue-crud :data="data"
+                  :option="option"
+                  :table-loading="tableLoading"
+                  @row-save="handleSave"
+                  @row-update="handleUpdate"
+                  @refresh-change="handlerefreshChange"
+                  @row-del="handleDel"
+                >
+      </avue-crud>
+    </el-card>
+  </section>
+</template>
+
+<script>
 // import * as databaseLogic from '@/network/model/databaseLogic'
-import {pageConfig} from './other/pageConfig'
+import {pageConfig} from './pageConfig'
 export default {
   name: 'tableField',
   data () {
@@ -171,3 +189,5 @@ export default {
 
   }
 }
+
+</script>

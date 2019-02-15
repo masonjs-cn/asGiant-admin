@@ -22,24 +22,10 @@ const top = [{
 const first = [{
     label: "数据库",
     path: '/database',
+    component: 'views/database/index',
     icon: 'icon-caidan',
-    children: [
-        {
-            label: "数据库管理",
-            path: 'databaseList',
-            component: 'views/database/index',
-            icon: 'icon-caidan',
-            children: []
-        },
-        {
-            label: "字段管理",
-            path: 'fieldList',
-            component: 'views/wel',
-            icon: 'icon-caidan',
-            children: []
-        }
-    ]
-},{
+    children: []
+}, {
     label: "用户管理",
     path: '/user',
     icon: 'icon-caidan',

@@ -7,10 +7,23 @@
                  @on-load="onLoad"
                  @row-save="handleSave"
                  @row-del="handleDel"
-                  @row-update="handleUpdate"
                  :table-loading="tableLoading"
-                 @refresh-change="refreshChange">
+                 @refresh-change="refreshChange"
+                 @row-dblclick="handleRowClick">
+
+        <template slot-scope="scope" slot="menu">
+              <el-button size="small" type="text"
+                        @click.stop="edit(scope.row,scope.index)">修改</el-button>
+        </template>
+
       </avue-crud>
+
+      <el-dialog title="修改" :visible.sync="accountShow">
+
+        <avue-form :option="accountOption" v-model="accountForm" @submit="handleUpdate"></avue-form>
+
+      </el-dialog>
+
     </el-card>
   </section>
 </template>
@@ -18,7 +31,7 @@
 <script>
 import * as Column from '@/api/column'
 import * as dataCenter from '@/api/dataCenter'
-import {pageConfig} from './pageConfig'
+import {pageConfig,accountOption} from './pageConfig'
 export default {
   data () {
     return {
@@ -31,69 +44,47 @@ export default {
       },
       data: [],
       option: pageConfig,
-      searchForm:{}
+      searchForm:{},
+      accountShow:false,
+      accountOption:accountOption,
+      accountForm:{}
     }
   },
   created () {
   },
   methods: {
+    // 加载函数
     onLoad(page) {
       this.page = page
       this.searchForm = page;
       this.loadUserList()
     },
-    selectionChange (list) {
-      this.$message.success('选中的数据' + JSON.stringify(list))
-    },
+    // 主函数
     loadUserList () {
       this.tableLoading = true
       this.searchForm = {
         'currentPage': this.page.currentPage,
         'pageSize': this.page.pageSize
       }
-
       Column.CheckTableList(this.searchForm)
-        .then(res => { 
+        .then(res => {
           this.data = res.data.data
           this.page.total = res.data.total
           this.tableLoading = false
       });
     },
+    // 列表
     sizeChange (val) {
       this.page.pageSize = val
       this.loadUserList()
     },
+    // 页码
     currentChange (val) {
       this.page.currentPage = val
       this.loadUserList()
-      this.$message.success('页码' + val)
     },
     /**
-     * @title 打开新增窗口
-    **/
-    handleAdd () {
-      this.$refs.crud.rowAdd()
-    },
-    /**
-     * @title 获取数据
-    **/
-    handleList () {
-      this.tableLoading = true
-      this.$store
-        .dispatch('GetUserData', { page: `${this.tablePage}` })
-        .then(data => {
-          setTimeout(() => {
-            this.tableData = data.tableData
-            this.page = {
-              total: data.total,
-              pageSize: data.pageSize
-            }
-            this.tableLoading = false
-          }, 1000)
-        })
-    },
-    /**
-     * @title 数据添加
+     * @title 用户保存
      **/
     handleSave (row, done) {
       let data = {
@@ -122,11 +113,9 @@ export default {
     },
     /**
      * @title 数据删除
-     * @param row 为当前的数据
-     * @param index 为当前更新数据的行数
-     *
      **/
     handleDel (row) {
+      if (!this.getTableRole(row)) {return}
       this.$confirm(`是否确认删除数据库名${row.column}`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -157,20 +146,21 @@ export default {
         })
         // .catch(err => {})
     },
+    edit(row){
+      if (!this.getTableRole(row)) {return}
+      this.accountShow = true;
+      this.accountForm=row;
+    },
     /**
      * @title 数据更新
-     * @param row 为当前的数据
-     * @param index 为当前更新数据的行数
-     * @param done 为表单关闭函数
-     *
      **/
-    handleUpdate (row, index, done) {
+    handleUpdate () {
       let data = {
         'infoJson': {
-          'column': row.column.slice(5),
-          'columnName': row.columnName
+          'column':  this.accountForm.column.slice(5),
+          'columnName':  this.accountForm.columnName
         },
-        'columnid': row.columnid
+        'columnid':  this.accountForm.columnid
       }
       dataCenter.updateTable(data)
         .then(res => {
@@ -182,7 +172,8 @@ export default {
             message: '修改成功',
             type: 'success'
           })
-          done()
+          // done()
+          this.accountShow = false;
           this.loadUserList()
         } else {
           this.$message({
@@ -196,14 +187,26 @@ export default {
 
     /**
      * @title 刷新数据
-     *
      **/
-
     refreshChange () {
       this.searchForm = {}
       this.loadUserList()
+    },
+    getTableRole(row){
+      if (!(row.column.includes('zmyq_'))) {
+        this.$message({
+          showClose: true,
+          message: '不能修改系统模块',
+          type: 'error'
+        })
+        return false
+      }
+      return true
+    },
+    handleRowClick (row) {
+      if (!this.getTableRole(row)) {return}
+      this.$router.push({path:'/fieldlist',query:{columnid:row.$columnid}})
     }
-
   }
 }
 </script>

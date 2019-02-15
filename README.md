@@ -18,6 +18,27 @@
  1. 数据库
     - 数据库管理 (增删改查数据库，针对数据，可以添加字段)
       - 字段管理 (增删改查字段,针对字段,可以直接生成栏目)
+         input	输入框
+         select	选择框
+         radio	单选框
+         phone	手机号输入框
+         checkbox	多选框
+         textarea	文本框
+         cascader	级联框
+         date	日期框
+         time	时间框
+         datetime	日期时间框
+         daterange	日期范围
+         timerange	时间范围
+         datetimerange	日期时间范围
+         week	周
+         month	月
+         year	年
+         dates	多个日期
+         ueditor	富文本编辑器
+         password	密码框
+         switch	开关框
+         tree	树框
  2. 栏目模块
     - 管理信息(升级的版本中，将会实现自动生成计划)  
  4. 用户
@@ -28,7 +49,7 @@
     - 模板管理
 6. 邮箱管理 (邮箱的配置)
 7. 短信管理 (短信的配置,现在只做关于腾讯云的短信，其他的占时不考虑接入)
-8. 文件管理 (针对于图片的管理，关于文件的管理,做成一个文件长裤提供配置)
+8. 文件管理 (针对于图片、文件的管理,提供配置路径保存)
 
 ### 代码使用：
 -  @/src/page/index/top/top-menu.vue 此处修改了平台的头部

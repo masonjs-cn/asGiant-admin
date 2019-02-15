@@ -29,4 +29,14 @@ export default [{
         component: () =>
             import( /* webpackChunkName: "views" */ '@/views/user/info')
     }]
+},{
+    path: '/fieldlist',
+    component: Layout,
+    redirect: '/fieldlist/index',
+    children: [{
+        path: 'index',
+        name: '字段管理',
+        component: () =>
+            import('@/views/tableField/index')
+    }]
 }]

@@ -97,7 +97,7 @@ export default {
     return {
       imgsrc:'',
       loginForm: {
-        userName: "小吴",
+        userName: "小梅",
         password: "123456",
         code: "",
         redomStr: ""
