@@ -39,26 +39,26 @@ const first = [{
         {
             label: "角色管理",
             path: '/roleList',
-            component: 'views/wel',
+            component: 'views/role/index',
             icon: 'icon-role',
             children: []
         }]
 },{
     label: "附件管理",
     path: '/attachment',
-    component: 'views/wel',
+    component: 'views/attachment/index',
     icon: 'icon-fujianguanli',
     children: []
 },{
     label: "邮箱管理",
     path: '/email',
-    component: 'views/wel',
+    component: 'views/email/index',
     icon: 'icon-youxiang',
     children: []
 },{
     label: "短信管理",
     path: '/sms',
-    component: 'views/wel',
+    component: 'views/sms/index',
     icon: 'icon-duanxin',
     children: []
 },]
