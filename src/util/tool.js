@@ -108,18 +108,26 @@ export const generateUUID = () => {
 }
 
 export const timestampToTime = (row, value, label, column) => {
-    debugger
     let timestamp = value;
     if (timestamp === null || timestamp === undefined) {
         return '--'
     } else {
-       var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
-       var Y = date.getFullYear() + '-'
-       var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-       var D = date.getDate() + ' '
-       var h = date.getHours() + ':'
-       var m = date.getMinutes() + ':'
-       var s = date.getSeconds()
-       return Y + M + D + h + m + s
+       Date.prototype.Format = function (fmt) {
+           var o = {
+               "M+": this.getMonth() + 1, // 月份
+               "d+": this.getDate(), // 日
+               "h+": this.getHours(), // 小时
+               "m+": this.getMinutes(), // 分
+               "s+": this.getSeconds(), // 秒
+               "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+               "S": this.getMilliseconds() // 毫秒
+           };
+           if (/(y+)/.test(fmt))
+               fmt = fmt.replace(RegExp.$1, (this.getFullYear() + ""));
+           for (var k in o)
+               if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+           return fmt;
+       }
+       return new Date(timestamp * 1000).Format('yy-MM-dd hh:mm:ss');
     }
 };
