@@ -1,166 +1,190 @@
 <template>
-  <div>
-    <basic-container>
-      <div class="page-title2">短信管理</div>
-      <div class="tip"></div>
-
+  <section>
+    <el-card class="box-card">
       <avue-crud :option="option"
                  :data="data" 
                  :page="page"
                  @on-load="onLoad"
+                 @row-save="handleSave"
+                 @row-del="handleDel"
+                  @row-update="handleUpdate"
                  :table-loading="tableLoading"
-                 @search-change="searchChange"
                  @refresh-change="refreshChange">
-                 
-      <template slot-scope="scope"
-                  slot="menu">
-            <el-button size="small" type="text"
-                      @click.stop="formalities(scope.row,scope.index)">添加手续费</el-button>
-            <el-button size="small" type="text"
-                      @click.stop="account(scope.row,scope.index)">核账</el-button>
-      </template>
-      
       </avue-crud>
-
-      <el-dialog title="核账" :visible.sync="accountShow" width="40%">
-
-        <avue-form :option="accountOption" v-model="accountForm" @submit="handleSubmit"></avue-form>
-
-      </el-dialog>
-
-    </basic-container>
-  </div>
+    </el-card>
+  </section>
 </template>
 
 <script>
-// import * as loanMgmt from '@/api/loanMgmt'
-import {repaidMarkedOption,accountOption} from './option'
-// import {getPowerKey} from '@/util/auth'
+import * as Column from '@/api/column'
+import * as sysJson from '@/const/sysJson'
+
+// import * as dataCenter from '@/api/dataCenter'
+import { userOption } from "./option.js";
 export default {
   data () {
     return {
-      searchForm:{},
-      data: [],
-      tableLoading:true,
-      option: repaidMarkedOption,
+      tableLoading: false,
       page: {
-          pageSize: 10,
+        pageSizes: [10, 20, 30, 40],
+        total: 20,
+        currentPage: 1,
+        pageSize: 10
       },
-      accountShow:false,
-      accountOption:accountOption,
-      accountForm:{},
-      dataInitial:[]
-      // isBoss:getPowerKey("BOSS")
+      data: [],
+      option: userOption,
+      searchForm:{}
     }
   },
   created () {
   },
   methods: {
-    refreshChange(){
-      this.searchForm = {}
-      this.refused();
-    },
     onLoad(page) {
-      page.dataTotal = page.total
       this.page = page
-      this.refused()
+      this.searchForm = page;
+      // this.getRoleList();
+      this.loadUserList()
     },
-      // 获取列表
-    refused() {
-        this.tableLoading = true;
-        this.searchForm.paging=this.page;
-      //   loanMgmt.incomeAndExpensesCount(this.searchForm)
-      //   .then(res => { 
-      //      const data=res.data.data;
-      //      this.dataInitial = data.list;
-      //      let dataExt=data.list;
-
-      //      for (let index = 0; index < dataExt.length; index++) {
-
-      //       if (dataExt[index].collatePaymoneyStatus === 0) {
-      //         dataExt[index].collatePaymoneyExt =  dataExt[index].countPaymoney
-      //       }else{
-      //         dataExt[index].collatePaymoneyExt = dataExt[index].collatePaymoney
-      //       }
-
-      //       if (dataExt[index].collateOnlineRepaymentMoneyStatus === 0) {
-      //          dataExt[index].collateOnlineRepaymentMoneyExt = dataExt[index].countOnlineRepaymentMoney
-      //       }else{
-      //         dataExt[index].collateOnlineRepaymentMoneyExt = dataExt[index].collateOnlineRepaymentMoney
-      //       }
-
-      //       if (dataExt[index].collateMarkRepaymentMoneyStatus === 0) {
-      //          dataExt[index].collateMarkRepaymentMoneyExt = dataExt[index].countMarkRepaymentMoney              
-      //       }else{
-      //         dataExt[index].collateMarkRepaymentMoneyExt =  dataExt[index].collateMarkRepaymentMoney
-      //       }
-      //      }
-
-      //      this.data = dataExt;
-      //      this.page = data.paging;
-      //      this.page.total =  data.paging.dataTotal;
-      //      this.tableLoading = false;
-      // });
-
+    loadUserList () {
+      this.tableLoading = true
+      this.searchForm = {
+        'currentPage': this.page.currentPage,
+        'pageSize': this.page.pageSize,
+        'classid' : sysJson.sysClassid.smsClassid
+      }
+      Column.CheckTable(this.searchForm)
+        .then(res => { 
+          this.data = res.data.data
+          this.page.total = res.data.total
+          this.tableLoading = false
+      });
     },
-    searchChange(params) {
+    // getRoleList(){
+    //   let data = {
+    //     'currentPage': 1,
+    //     'pageSize': 1000,
+    //     'classid' : sysJson.sysClassid.role_dictionaryClassid
+    //   }
+    //   Column.CheckTable(data)
+    //   .then(res => { 
+    //     res = res.data.data
+    //     let roleList = []
+    //     for (let index = 0; index < res.length; index++) {
+    //       roleList.push({
+    //         label: res[index].roleName,
+    //         value: res[index].roleid,
+    //       })
+    //     }
+    //     this.option.column[0].dicData = roleList
+    //     this.tableLoading = false
+    //   })
+    // },
+    sizeChange (val) {
+      this.page.pageSize = val
+      this.loadUserList()
+      // this.$message.success("行数" + val);
+    },
+    currentChange (val) {
+      this.page.currentPage = val
+      this.loadUserList()
+      this.$message.success('页码' + val)
+    },
+    /**
+     * @title 打开新增窗口
+     * @detail 调用crud的handleadd方法即可
+     *
+     **/
+    handleAdd () {
+      this.$refs.crud.rowAdd()
+    },
+    /**
+     * @title 获取数据
+     * @detail 赋值为tableData表格即可
+     *
+     **/
+    handleList () {
+      this.tableLoading = true
+      this.$store
+        .dispatch('GetUserData', { page: `${this.tablePage}` })
+        .then(data => {
+          setTimeout(() => {
+            this.tableData = data.tableData
+            this.page = {
+              total: data.total,
+              pageSize: data.pageSize
+            }
+            this.tableLoading = false
+          }, 1000)
+        })
+    },
+    /**
+     * @title 数据添加
+     * @param row 为当前的数据
+     * @param done 为表单关闭函数
+     *
+     **/
+    handleSave (row, done) {
+      // this.tableData.push(row);
+      console.log('====================================')
+      console.log(row)
+      console.log('====================================')
+      this.$message({
+        showClose: true,
+        message: '添加成功',
+        type: 'success'
+      })
+      done()
+    },
+    /**
+     * @title 数据删除
+     * @param row 为当前的数据
+     * @param index 为当前更新数据的行数
+     *
+     **/
+    handleDel (row, index) {
+      this.$confirm(`是否确认删除序号为${row.name}`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          this.tableData.splice(index, 1)
+          this.$message({
+            showClose: true,
+            message: '删除成功',
+            type: 'success'
+          })
+        })
+        // .catch(err => {})
+    },
+    /**
+     * @title 数据更新
+     * @param row 为当前的数据
+     * @param index 为当前更新数据的行数
+     * @param done 为表单关闭函数
+     *
+     **/
+    handleUpdate (row, index, done) {
+      console.log('====================================')
+      console.log(row)
+      console.log('====================================')
+      // this.tableData.splice(index, 1, row);
+      this.$message({
+        showClose: true,
+        message: '修改成功',
+        type: 'success'
+      })
+      done()
+    },
+    /**
+     * @title 刷新数据
+     *
+     **/
+
+    refreshChange () {
       this.searchForm = {}
-      this.page = { 
-          currentPage: 1,
-          dataTotal: 0,
-          total:0,
-          pageSize:this.page.pageSize
-      }
-      if (params.countTime&&params.countTime[0]===""){
-        delete params.countTime
-      }
-      this.searchForm = Object.assign(params, this.searchForm)
-      this.refused()
-    },
-    account(row,index){
-      this.accountShow = true;
-      this.accountForm=this.dataInitial[index];
-      console.log('====================================');
-      console.log(this.dataInitial[index]);
-      console.log('====================================');
-    },
-    handleSubmit(){
-      // loanMgmt.collateBill(this.accountForm)
-      // .then(res=>{
-      //    const data=res.data;
-      //    if (data.code===0) {
-      //       this.$message({
-      //         type: 'success',
-      //         message: "成功"
-      //       });
-      //       this.accountShow = false;
-      //       this.refreshChange()
-      //     }else{
-      //       this.$message({
-      //         type: 'error',
-      //         message: data.message
-      //       });
-      //     }
-      // })
-
-    },
-   //  添加手续费
-   formalities(){
-     
+      this.loadUserList()
     }
   }
 }
 </script>
-
-<style>
-.page-title2 {
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 36px;
-}
-.tip{
-  font-size: 13px;
-  line-height: 36px;
-  margin-bottom: 20px;
-}
-</style>

@@ -47,7 +47,7 @@
             <!-- <span class="login-code-img"
                   @click="refreshCode"
                   v-if="code.type == 'text'">{{code.value}}</span> -->
-            <img :src="imgsrc"
+            <img src="http://localhost/demo/00.vipadmin/sever/think-admin/public/admin/Code/ImageCode"
                  ref="img"
                  class="login-code-img"
                  @click="refreshCode"
@@ -127,7 +127,7 @@ export default {
     };
   },
   created() {
-    this.imgsrc='api/Code/ImageCode';
+    this.imgsrc='http://localhost/demo/00.vipadmin/sever/think-admin/public/admin/Code/ImageCode';
     this.refreshCode();
   },
   mounted() {},
@@ -142,7 +142,7 @@ export default {
       //   ? (this.code.value = randomLenNum(this.code.len))
       //   : (this.code.src = `${this.codeUrl}/${this.loginForm.redomStr}`);
       this.loginForm.code = '';
-      this.$refs.img.src = 'api/Code/ImageCode';
+      this.$refs.img.src = 'http://localhost/demo/00.vipadmin/sever/think-admin/public/admin/Code/ImageCode';
     },
     showPassword() {
       this.passwordType == ""

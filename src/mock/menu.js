@@ -39,7 +39,7 @@ const first = [{
         {
             label: "角色管理",
             path: '/roleList',
-            component: 'views/role/index',
+            component: 'views/roleList/index',
             icon: 'icon-role',
             children: []
         }]

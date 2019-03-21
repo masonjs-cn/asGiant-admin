@@ -1,26 +1,26 @@
 import request from '@/router/axios';
-// import { baseUrl } from '@/config/env';
+import { baseUrl, api } from '@/config/env';
 
 export const checkField = (page) => request({
-    url: 'api/Info/checkField',
+    url:  baseUrl + api + '/Info/checkField',
     method: 'post',
     data: page
 });
 
 export const addInfos = (page) => request({
-    url: 'api/Info/addInfos',
+    url:  baseUrl + api + '/Info/addInfos',
     method: 'post',
     data: page
 });
 
 export const deleInfos = (page) => request({
-    url: 'api/Info/deleInfos',
+    url:  baseUrl + api + '/Info/deleInfos',
     method: 'post',
     data: page
 });
 
 export const updateInfos = (page) => request({
-    url: 'api/Info/updateInfos',
+    url:  baseUrl + api + '/Info/updateInfos',
     method: 'post',
     data: page
 });

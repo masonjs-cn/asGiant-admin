@@ -50,7 +50,7 @@ export default {
       this.searchForm = {
         'currentPage': this.page.currentPage,
         'pageSize': this.page.pageSize,
-        'classid' : sysJson.sysClassid.e_mailClassid
+        'classid' : sysJson.sysClassid.role_dictionaryClassid
       }
       Column.CheckTable(this.searchForm)
         .then(res => { 
