@@ -3,116 +3,127 @@ const top = [{
     label: "首页",
     path: "/wel/index",
     icon: 'el-icon-menu',
+    meta: {
+        i18n: 'dashboard',
+    },
     parentId: 0
-},
-// {
-//     label: "官网",
-//     icon: 'el-icon-document',
-//     path: "https://avuex.avue.top",
-//     parentId: 1
-// },
-// {
-//     label: "测试",
-//     icon: 'el-icon-document',
-//     path: "https://avuex.avue.top",
-//     parentId: 2
-// }
-]
+}]
 
 const first = [{
-    label: "数据库",
-    path: '/database',
-    component: 'views/database/index',
-    icon: 'icon-shujuku',
-    children: []
-}, {
-    label: "用户管理",
-    path: '/user',
-    icon: 'icon-usergroup',
-    children: [{
-            label: "管理用户",
-            path: 'userList',
-            component: 'views/usermanage/index',
-            icon: 'icon-yonghu',
-            children: []
-        },
-        {
-            label: "角色管理",
-            path: '/roleList',
-            component: 'views/roleList/index',
-            icon: 'icon-role',
-            children: []
-        }]
-},{
-    label: "附件管理",
-    path: '/attachment',
-    component: 'views/attachment/index',
-    icon: 'icon-fujianguanli',
-    children: []
-},{
-    label: "邮箱管理",
-    path: '/email',
-    component: 'views/email/index',
-    icon: 'icon-youxiang',
-    children: []
-},{
-    label: "短信管理",
-    path: '/sms',
-    component: 'views/sms/index',
-    icon: 'icon-duanxin',
-    children: []
-},]
-
-const second = [{
-    label: "首页",
-    path: '/wel',
-    component: 'views/wel',
+    label: "缓冲",
+    path: '/cache',
+    component: 'views/util/cache',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'cache',
+        keepAlive: true
+    },
     children: []
 }, {
     label: "标签",
     path: '/tags',
     component: 'views/util/tags',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'tags',
+    },
     children: []
 }, {
     label: "存储",
     path: '/store',
     component: 'views/util/store',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'store',
+    },
     children: []
 }, {
     label: "全局函数",
     path: 'https://avuex.avue.top/$/doc/api',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'api',
+    },
     children: []
 }, {
     label: "日志监控",
     path: '/logs',
     component: 'views/util/logs',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'logs',
+    },
     children: []
 }, {
     label: "表格",
     path: '/table',
     component: 'views/util/table',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'table',
+    },
     children: []
 }, {
     label: "表单",
     path: '/form',
     component: 'views/util/form',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'form'
+    },
     children: []
 }, {
+    label: "权限",
+    path: '/permission',
+    component: 'views/util/permission',
+    icon: 'icon-caidan',
+    meta: {
+        i18n: 'permission',
+    },
+    children: []
+}, {
+    label: "返回顶部",
+    path: '/top',
+    component: 'views/util/top',
+    icon: 'icon-caidan',
+    meta: {
+        i18n: 'top',
+    },
+    children: []
+}, {
+    label: "表格表单",
+    path: '/crud-form',
+    component: 'views/util/crud-form',
+    icon: 'icon-caidan',
+    meta: {
+        i18n: 'crudForm',
+    },
+    children: []
+}, {
+    label: "图钉",
+    path: '/affix',
+    component: 'views/util/affix',
+    icon: 'icon-caidan',
+    meta: {
+        i18n: 'affix',
+    },
+    children: []
+},
+{
     label: "数据展示",
     path: '/data',
     component: 'views/util/data',
     icon: 'icon-caidan',
+    meta: {
+        i18n: 'data',
+    },
     children: []
 }, {
     label: "异常页",
     path: '/error',
+    meta: {
+        i18n: 'error',
+    },
     icon: 'icon-caidan',
     children: [{
         label: "403",
@@ -135,16 +146,9 @@ const second = [{
     }]
 }]
 
-const third = [{
-    label: "测试页面",
-    path: '/test',
-    component: 'views/test',
-    icon: 'icon-caidan',
-    children: []
-}]
 export default ({ mock }) => {
     if (!mock) return;
-    let menu = [first, second, third];
+    let menu = [first];
     Mock.mock('/user/getMenu', 'get', (res) => {
         let body = JSON.parse(res.body);
         return {

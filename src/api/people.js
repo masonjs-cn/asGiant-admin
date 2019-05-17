@@ -13,18 +13,21 @@ export const registeredUser = (page) => request({
     data:page
 });
 
+// 手机登录
 export const loginTel = (page) => request({
     url: baseUrl+ api + '/People/loginTel',
     method: 'post',
     data:page
 });
 
+// 邮箱登录
 export const loginEmail = (page) => request({
     url: baseUrl+ api +'/People/loginEmail',
     method: 'post',
     data:page
 });
 
+// 用户名登录
 export const loginUserName = (page) => request({
     url: baseUrl+ api +'/People/loginUserName',
     method: 'post',

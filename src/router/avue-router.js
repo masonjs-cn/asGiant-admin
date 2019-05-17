@@ -4,9 +4,10 @@ let RouterPlugin = function () {
     this.$store = null;
 
 };
-RouterPlugin.install = function (router, store) {
+RouterPlugin.install = function (vue, router, store, i18n) {
     this.$router = router;
     this.$store = store;
+    this.$vue = new vue({ i18n });
     function isURL(s) {
         return /^http[s]?:\/\/.*/.test(s)
     }
@@ -20,13 +21,14 @@ RouterPlugin.install = function (router, store) {
     this.$router.$avueRouter = {
         //全局配置
         $website: this.$store.getters.website,
-        $defaultTitle: 'Avuex 通用管理 系统快速开发框架',
         routerList: [],
         group: '',
+        meta: {},
         safe: this,
         // 设置标题
-        setTitle: function (title) {
-            title = title ? `${title}——${this.$defaultTitle}` : this.$defaultTitle;
+        setTitle: (title) => {
+            const defaultTitle = this.$vue.$t('title');
+            title = title ? `${title}——${defaultTitle}` : defaultTitle;
             document.title = title;
         },
         closeTag: (value) => {
@@ -35,6 +37,17 @@ RouterPlugin.install = function (router, store) {
                 tag = this.$store.getters.tagList.filter(ele => ele.value === value)[0]
             }
             this.$store.commit('DEL_TAG', tag)
+        },
+        generateTitle: (title, key) => {
+            if (!key) return title;
+            const hasKey = this.$vue.$te('route.' + key)
+            if (hasKey) {
+                // $t :this method from vue-i18n, inject in @/lang/index.js
+                const translatedTitle = this.$vue.$t('route.' + key)
+
+                return translatedTitle
+            }
+            return title
         },
         //处理路由
         getPath: function (params) {
@@ -81,7 +94,7 @@ RouterPlugin.install = function (router, store) {
             for (let i = 0; i < aMenu.length; i++) {
                 const oMenu = aMenu[i];
                 if (this.routerList.includes(oMenu[propsDefault.path])) return;
-                const path = (() => {
+                let path = (() => {
                     if (first) {
                         return oMenu[propsDefault.path].replace('/index', '')
                     } else {
@@ -92,8 +105,15 @@ RouterPlugin.install = function (router, store) {
                     name = oMenu[propsDefault.label],
                     icon = oMenu[propsDefault.icon],
                     children = oMenu[propsDefault.children],
-                    meta = oMenu[propsDefault.meta];
+                    meta = oMenu[propsDefault.meta] || {};
 
+                meta = Object.assign(meta, (function () {
+                    if (meta.keepAlive === true) {
+                        return {
+                            $keepAlive: true
+                        }
+                    }
+                })());
                 const isChild = children.length !== 0;
                 const oRouter = {
                     path: path,

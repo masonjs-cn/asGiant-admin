@@ -1,45 +1,86 @@
 {
-    "name": "avuex-cli",
-    "version": "1.0.0",
-    "private": true,
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint",
-        "test:unit": "vue-cli-service test:unit",
-        "test:e2e": "vue-cli-service test:e2e"
-    },
-    "dependencies": {
-        "axios": "^0.18.0",
-        "babel-polyfill": "^6.26.0",
-        "classlist-polyfill": "^1.2.0",
-        "element-ui": "^2.4.5",
-        "js-cookie": "^2.2.0",
-        "mockjs": "^1.0.1-beta3",
-        "nprogress": "^0.2.0",
-        "script-loader": "^0.7.2",
-        "vue": "^2.5.16",
-        "vue-axios": "^2.1.2",
-        "vue-router": "^3.0.1",
-        "vuex": "^3.0.1"
-    },
-    "devDependencies": {
-        "@vue/cli-plugin-babel": "^3.1.1",
-        "@vue/cli-plugin-eslint": "^3.1.5",
-        "@vue/cli-service": "^3.1.4",
-        "chai": "^4.1.2",
-        "node-sass": "^4.9.0",
-        "sass-loader": "^7.0.1",
-        "vue-template-compiler": "^2.5.17"
-    },
-    "lint-staged": {
-        "*.js": [
-            "vue-cli-service lint",
-            "git add"
-        ],
-        "*.vue": [
-            "vue-cli-service lint",
-            "git add"
-        ]
-    }
+  "name": "egg-admin",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "vue-cli-service build&&egg-scripts start --daemon --title=egg-server-example",
+    "stop": "egg-scripts stop --title=egg-server-example",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod",
+    "===": "====",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint-vue": "vue-cli-service lint",
+    "analyz": "npm_config_report=true npm run build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e"
+  },
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "classlist-polyfill": "^1.2.0",
+    "egg": "^2.15.1",
+    "egg-scripts": "^2.11.0",
+    "element-ui": "^2.4.5",
+    "js-cookie": "^2.2.0",
+    "mockjs": "^1.0.1-beta3",
+    "nprogress": "^0.2.0",
+    "script-loader": "^0.7.2",
+    "vue": "^2.5.16",
+    "vue-axios": "^2.1.2",
+    "vue-i18n": "^8.7.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.1.1",
+    "@vue/cli-plugin-eslint": "^3.1.5",
+    "@vue/cli-service": "^3.1.4",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "chai": "^4.1.2",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "egg-static": "^2.1.1",
+    "egg-view-ejs": "^2.0.0",
+    "eslint": "^5.13.0",
+    "eslint-config-egg": "^7.1.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-bundle-analyzer": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "ci": {
+    "version": "10"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "author": "",
+  "license": "MIT"
 }

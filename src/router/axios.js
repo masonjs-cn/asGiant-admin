@@ -15,7 +15,6 @@ import website from '@/config/website';
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 axios.defaults.timeout = 10000;
-
 //返回其他状态吗
 axios.defaults.validateStatus = function (status) {
     return status >= 200 && status <= 500; // 默认的
@@ -32,11 +31,10 @@ axios.interceptors.request.use(config => {
     const meta = (config.meta || {});
     const isToken = meta.isToken === false;
     if (getToken() && !isToken) {
-        config.headers['auth'] = getToken() // 让每个请求携带token--['Authorization']为自定义key 请根据实际情况自行修改
-        // config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带token--['Authorization']为自定义key 请根据实际情况自行修改
+        config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带token--['Authorization']为自定义key 请根据实际情况自行修改
     }
     //headers中配置serialize为true开启序列化
-    if (config.methods === 'post' && meta.isSerialize === true) {
+    if (config.method === 'post' && meta.isSerialize === true) {
         config.data = serialize(config.data);
     }
     return config

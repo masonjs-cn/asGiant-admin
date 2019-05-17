@@ -5,12 +5,12 @@
            ref="loginForm"
            :model="loginForm"
            label-width="0">
-    <el-form-item prop="userName">
+    <el-form-item prop="username">
       <el-input size="small"
                 @keyup.enter.native="handleLogin"
-                v-model="loginForm.userName"
+                v-model="loginForm.username"
                 auto-complete="off"
-                placeholder="请输入用户名">
+                :placeholder="$t('login.username')">
         <i slot="prefix"
            class="icon-yonghu"></i>
       </el-input>
@@ -21,7 +21,7 @@
                 :type="passwordType"
                 v-model="loginForm.password"
                 auto-complete="off"
-                placeholder="请输入密码">
+                :placeholder="$t('login.password')">
         <i class="el-icon-view el-input__icon"
            slot="suffix"
            @click="showPassword"></i>
@@ -37,21 +37,20 @@
                     :maxlength="code.len"
                     v-model="loginForm.code"
                     auto-complete="off"
-                    placeholder="请输入验证码">
+                    :placeholder="$t('login.code')">
             <i slot="prefix"
                class="icon-yanzhengma"></i>
           </el-input>
         </el-col>
         <el-col :span="8">
           <div class="login-code">
-            <!-- <span class="login-code-img"
+            <span class="login-code-img"
                   @click="refreshCode"
-                  v-if="code.type == 'text'">{{code.value}}</span> -->
-            <img src="http://localhost/demo/00.vipadmin/sever/think-admin/public/admin/Code/ImageCode"
-                 ref="img"
+                  v-if="code.type == 'text'">{{code.value}}</span>
+            <img :src="code.src"
                  class="login-code-img"
                  @click="refreshCode"
-            />
+                 v-else />
             <!-- <i class="icon-shuaxin login-code-icon" @click="refreshCode"></i> -->
           </div>
         </el-col>
@@ -63,30 +62,19 @@
       <el-button type="primary"
                  size="small"
                  @click.native.prevent="handleLogin"
-                 class="login-submit">登录</el-button>
+                 class="login-submit">{{$t('login.submit')}}</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-// import { isvalidUsername } from "@/util/validate";
-// import { randomLenNum } from "@/util/util";
+import { randomLenNum } from "@/util/util";
 import { mapGetters } from "vuex";
-import * as people from '@/api/people'
 export default {
   name: "userlogin",
   data() {
-    const validateUsername = (rule, value, callback) => {
-      // if (!isvalidUsername(value)) {
-      if (value=="") {
-        callback(new Error("请输入正确的用户名"));
-      } else {
-        callback();
-      }
-    };
     const validateCode = (rule, value, callback) => {
-      if (value=="") {
-      // if (this.code.value != value) {
+      if (this.code.value != value) {
         this.loginForm.code = "";
         this.refreshCode();
         callback(new Error("请输入正确的验证码"));
@@ -95,9 +83,8 @@ export default {
       }
     };
     return {
-      imgsrc:'',
       loginForm: {
-        userName: "小梅",
+        username: "admin",
         password: "123456",
         code: "",
         redomStr: ""
@@ -110,8 +97,8 @@ export default {
         type: "text"
       },
       loginRules: {
-        userName: [
-          { required: true, trigger: "blur", validator: validateUsername }
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" }
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
@@ -127,7 +114,6 @@ export default {
     };
   },
   created() {
-    this.imgsrc='http://localhost/demo/00.vipadmin/sever/think-admin/public/admin/Code/ImageCode';
     this.refreshCode();
   },
   mounted() {},
@@ -137,12 +123,11 @@ export default {
   props: [],
   methods: {
     refreshCode() {
-      // this.loginForm.redomStr = randomLenNum(this.code.len, true);
-      // this.code.type == "text"
-      //   ? (this.code.value = randomLenNum(this.code.len))
-      //   : (this.code.src = `${this.codeUrl}/${this.loginForm.redomStr}`);
-      this.loginForm.code = '';
-      this.$refs.img.src = 'http://localhost/demo/00.vipadmin/sever/think-admin/public/admin/Code/ImageCode';
+      this.loginForm.redomStr = randomLenNum(this.code.len, true);
+      this.code.type == "text"
+        ? (this.code.value = randomLenNum(this.code.len))
+        : (this.code.src = `${this.codeUrl}/${this.loginForm.redomStr}`);
+      this.loginForm.code = this.code.value;
     },
     showPassword() {
       this.passwordType == ""
@@ -152,24 +137,9 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          people.loginUserName(this.loginForm)
-          .then(res=>{
-            if (res.data.flag==1) {
-                this.$store.dispatch("LoginByUsername", res.data).then(() => {
-                  this.$router.push({ path: this.tagWel.value });
-                });
-                return
-            }
-
-            this.$message({
-              type: 'error',
-              message: res.data.msg
-            });
-
-          })
-          // this.$store.dispatch("LoginByUsername", this.loginForm).then(() => {
-          //   this.$router.push({ path: this.tagWel.value });
-          // });
+          this.$store.dispatch("LoginByUsername", this.loginForm).then(() => {
+            this.$router.push({ path: this.tagWel.value });
+          });
         }
       });
     }

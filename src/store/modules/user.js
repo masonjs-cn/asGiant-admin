@@ -1,23 +1,22 @@
 import { setToken, removeToken } from '@/util/auth'
 import { setStore, getStore } from '@/util/store'
-import { isURL } from '@/util/validate'
-import { 
-    // encryption,
-     deepClone } from '@/util/util'
+import { isURL, validatenull } from '@/util/validate'
+import { encryption, deepClone } from '@/util/util'
 import webiste from '@/config/website'
-import { 
-    // loginByUsername, 
-    getUserInfo, getMenu, getTopMenu, logout, refeshToken } from '@/api/user'
+import { loginByUsername, getUserInfo, getMenu, getTopMenu, logout, refeshToken } from '@/api/user'
 
 
 function addPath(ele, first) {
-    const propsConfig = webiste.menu.props;
+    const menu = webiste.menu;
+    const propsConfig = menu.props;
     const propsDefault = {
         label: propsConfig.label || 'label',
         path: propsConfig.path || 'path',
         icon: propsConfig.icon || 'icon',
         children: propsConfig.children || 'children'
     }
+    const icon = ele[propsDefault.icon];
+    ele[propsDefault.icon] = validatenull(icon) ? menu.iconDefault : icon;
     const isChild = ele[propsDefault.children] && ele[propsDefault.children].length !== 0;
     if (!isChild && first && !isURL(ele[propsDefault.path])) {
         ele[propsDefault.path] = ele[propsDefault.path] + '/index'
@@ -43,40 +42,32 @@ const user = {
     actions: {
         //根据用户名登录
         LoginByUsername({ commit }, userInfo) {
-            // const user = encryption({
-            //     data: userInfo,
-            //     type: 'Aes',
-            //     key: 'avue',
-            //     param: ['useranme', 'password']
-            // });
-            setStore({
-                name: 'userInfos',
-                content: userInfo.msg,
-                type: 'session'
-            })
+            const user = encryption({
+                data: userInfo,
+                type: 'Aes',
+                key: 'avue',
+                param: ['useranme', 'password']
+            });
             return new Promise((resolve) => {
-                // loginByUsername(user.username, user.password, userInfo.code, userInfo.redomStr).then(res => {
-                    // const data = res.data.data;
-                    // commit('SET_TOKEN', data);
-                    commit('SET_TOKEN', userInfo.msg.auth);
+                loginByUsername(user.username, user.password, userInfo.code, userInfo.redomStr).then(res => {
+                    const data = res.data.data;
+                    commit('SET_TOKEN', data);
                     commit('DEL_ALL_TAG');
                     commit('CLEAR_LOCK');
                     resolve();
-                // })
+                })
             })
         },
         //根据手机号登录
-        LoginByPhone({ commit }, 
-            // userInfo
-            ) {
+        LoginByPhone({ commit }, userInfo) {
             return new Promise((resolve) => {
-                // loginByUsername(userInfo.phone, userInfo.code).then(res => {
-                    // const data = res.data.data;
-                    // commit('SET_TOKEN', data);
+                loginByUsername(userInfo.phone, userInfo.code).then(res => {
+                    const data = res.data.data;
+                    commit('SET_TOKEN', data);
                     commit('DEL_ALL_TAG');
                     commit('CLEAR_LOCK');
                     resolve();
-                // })
+                })
             })
         },
         GetUserInfo({ commit }) {
@@ -93,13 +84,11 @@ const user = {
             })
         },
         //刷新token
-        RefeshToken({ state, 
-            // commit 
-        }) {
+        RefeshToken({ state, commit }) {
             return new Promise((resolve, reject) => {
                 refeshToken(state.refeshToken).then(res => {
                     const data = res.data.data;
-                    // commit('SET_TOKEN', data);
+                    commit('SET_TOKEN', data);
                     resolve(data);
                 }).catch(error => {
                     reject(error)

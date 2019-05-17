@@ -9,7 +9,7 @@
                       :key="index">
           <template slot="title">
             <i :class="item.icon"></i>
-            <span>{{item.label}}</span>
+            <span>{{generateTitle(item)}}</span>
           </template>
         </el-menu-item>
       </template>
@@ -39,6 +39,12 @@ export default {
         this.items = res;
       });
     },
+    generateTitle(item) {
+      return this.$router.$avueRouter.generateTitle(
+        item.label,
+        (item.meta || {}).i18n
+      );
+    },
     openMenu(item) {
       this.$store.dispatch("GetMenu", item.parentId).then(data => {
         if (data.length !== 0) {
@@ -58,7 +64,8 @@ export default {
         this.$router.push({
           path: this.$router.$avueRouter.getPath({
             name: itemActive.label,
-            src: itemActive.path
+            src: itemActive.path,
+            i18n: itemActive.meta.i18n
           })
         });
       });

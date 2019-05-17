@@ -3,7 +3,7 @@
                    popper-class="my-autocomplete"
                    v-model="value"
                    :fetch-suggestions="querySearch"
-                   placeholder="请输入搜索内容"
+                   :placeholder="$t('search')"
                    @select="handleSelect">
 
     <template slot-scope="{ item }">
@@ -56,9 +56,11 @@ export default {
       const findMenu = list => {
         for (let i = 0; i < list.length; i++) {
           const ele = Object.assign({}, list[i]);
-          if (ele[this.childrenKey]) findMenu(ele[this.childrenKey]);
-          delete ele[this.childrenKey];
-          this.menuList.push(ele);
+          if (this.validatenull(ele[this.childrenKey])) {
+            this.menuList.push(ele);
+          } else {
+            findMenu(ele[this.childrenKey]);
+          }
         }
       };
       this.menuList = [];
@@ -85,7 +87,8 @@ export default {
       this.$router.push({
         path: this.$router.$avueRouter.getPath({
           name: item[this.labelKey],
-          src: item[this.pathKey]
+          src: item[this.pathKey],
+          i18n: (item.meta || {}).i18n
         }),
         query: item.query
       });
