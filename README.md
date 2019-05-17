@@ -1,11 +1,5 @@
 # egg-admin
 
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
-```
-
 ### 说明：
 
 - 基于egg架构的自动生成接口的框架
@@ -122,10 +116,13 @@ $ open http://localhost:7001/
 ---------------------
 
 ### 代码使用：
-- npm i egg-init -g
-- npm i nodeinstall -g
-- npm i
+
+```bash
+$ npm i
+$ npm run dev
+$ open http://localhost:7001/
+```
 
 ### 源码地址：
 
-https://github.com/MYQ1996/egg-admin
+https://github.com/MYQ1996/asGiant-admin.git
