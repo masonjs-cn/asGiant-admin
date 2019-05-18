@@ -8,7 +8,7 @@
 > 这样即使你是一个不懂后端的同学，你也可以直接调用接口给前端使用
 
 ### 网址
-<a href="admin.shanghai70.com" target="_blank"><strong>预览网址</strong></a>
+<a href="http://admin.shanghai70.com" target="_blank"><strong>预览网址</strong></a>
 
 ### 功能
 - 增删改查数据库
