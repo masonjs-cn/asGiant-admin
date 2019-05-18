@@ -23,6 +23,13 @@ module.exports = appInfo => {
     }, // 左边写成.html后缀，会自动渲染.html文件
   };
 
+  config.mongoose = {
+    client: {
+      url: 'mongodb://myz:123456@123.206.177.252:27017/asGiant',
+      options: {},
+    },
+  };
+
   // static
   config.static = {
     prefix: '/',
