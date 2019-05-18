@@ -33,7 +33,7 @@ module.exports = appInfo => {
   // static
   config.static = {
     prefix: '/',
-    dir: path.join(appInfo.baseDir, 'app/public/'),
+    dir: path.join(appInfo.baseDir, 'app/view/'),
   };
 
   // add your user config here
