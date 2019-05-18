@@ -30,6 +30,26 @@ module.exports = appInfo => {
     },
   };
 
+  // 中间件
+  config.middleware = [
+    'params',
+  ];
+
+  // 校验机制
+  config.validatePlus = {
+    resolveError(ctx, errors) {
+      if (errors.length) {
+        ctx.type = 'json';
+        ctx.status = 400;
+        ctx.body = {
+          code: 400,
+          error: errors,
+          message: '参数错误',
+        };
+      }
+    },
+  };
+
   // static
   config.static = {
     prefix: '/',

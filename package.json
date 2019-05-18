@@ -32,6 +32,7 @@
     "egg": "^2.15.1",
     "egg-mongoose": "^3.2.0",
     "egg-scripts": "^2.11.0",
+    "egg-validate-plus": "^1.1.6",
     "element-ui": "^2.4.5",
     "js-cookie": "^2.2.0",
     "mockjs": "^1.0.1-beta3",

@@ -5,8 +5,18 @@ module.exports = app => {
   const UserSchema = new Schema({
     username: {
       type: String,
+      unqiue: true,
+      require: true,
     },
     password: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      require: true,
+    },
+    phone: {
       type: String,
     },
   });

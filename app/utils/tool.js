@@ -12,6 +12,12 @@ const createCode = () => {
   return code;
 };
 
+
+const expire = () => {
+  return new Date().getTime() + 60 * 60 * 1000;
+};
+
 module.exports = {
   createCode,
+  expire,
 };

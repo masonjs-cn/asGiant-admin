@@ -1,6 +1,6 @@
 # asGiant-admin
 
-- asGiant-admin is an architecture that does not require a backend。
+asGiant-admin is an architecture that does not require a backend。
 
 ### 介绍
 > 基于egg架构的自动生成接口的框架
