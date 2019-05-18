@@ -17,7 +17,23 @@ const expire = () => {
   return new Date().getTime() + 60 * 60 * 1000;
 };
 
+const success = (ctx, message) => {
+  ctx.body = {
+    code: 0,
+    message,
+  };
+};
+
+const error = (ctx, message) => {
+  ctx.body = {
+    code: 1,
+    message,
+  };
+};
+
 module.exports = {
   createCode,
   expire,
+  success,
+  error,
 };

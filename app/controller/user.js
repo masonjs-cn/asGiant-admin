@@ -2,7 +2,6 @@
 
 const Controller = require('egg').Controller;
 const tool = require('../utils/tool.js');
-
 class UserController extends Controller {
 
   async signup() {
@@ -11,8 +10,6 @@ class UserController extends Controller {
     //   password, // 密码
     //   code, // 验证码
     // } = ctx.params;
-
-
   }
 
   async signin() {
@@ -34,12 +31,14 @@ class UserController extends Controller {
     const validateResult = await ctx.validate(rule, ctx.params);
     // 验证不通过时，阻止后面的代码执行
     if (!validateResult) return;
-    // console.log('====================================');
-    // console.log(ctx.validate);
-    // console.log('====================================');
-    //   signinMsg.userPass = ctx.helper.encrypt(signinMsg.userPass);
-    //   const result = await ctx.service.user.signin(signinMsg);
-    ctx.body = 'ok';
+    const {
+      userName,
+      userPass,
+    } = ctx.params;
+
+    const userInfo = await this.service.user.findUser({ username: userName });
+    userInfo.password === userPass ? tool.success(ctx, '登录成功') : tool.error(ctx, '登录失败');
+
   }
 
 }
