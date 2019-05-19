@@ -20,6 +20,7 @@ asGiant-admin is an architecture that does not require a backend。
 ### 技术栈
 - egg
 - mongdb
+- redis
 - avuex
 
 ### 数据接口:
@@ -31,9 +32,11 @@ https://github.com/MYQ1996/asGiant-admin.git
 ### 使用说明:
 <a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/guide.md"><strong>使用指南</strong></a>
 
-<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/installation.md"><strong>nginx安装</strong></a>
+<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/nginx.md"><strong>nginx安装</strong></a>
 
-<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/installation.md"><strong>mongdb安装</strong></a>
+<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/mongodb.md"><strong>mongdb安装</strong></a>
+
+<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/redis.md"><strong>redis安装</strong></a>
 
 <a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/directory.md"><strong>路径说明</strong></a>
 
