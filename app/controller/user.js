@@ -5,6 +5,10 @@ const tool = require('../utils/tool.js');
 class UserController extends Controller {
 
   async signup() {
+    const { app, ctx } = this;
+    // const time = 3600 * 24 * 30; // token过期时间
+    await app.redis.set('foo', 'bar');
+    tool.success(ctx, '登录成功');
     // const {
     //   userName, // 用户名
     //   password, // 密码

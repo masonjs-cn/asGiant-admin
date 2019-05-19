@@ -29,6 +29,14 @@ module.exports = appInfo => {
       options: {},
     },
   };
+  config.redis = {
+    client: {
+      port: 6380, // Redis port
+      host: '123.206.177.252', // Redis host
+      password: '57484279',
+      db: 0,
+    },
+  };
 
   // 中间件
   config.middleware = [
