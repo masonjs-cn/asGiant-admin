@@ -43,6 +43,7 @@ class UserController extends Controller {
     // } = ctx.params;
   }
 
+
   // 登录
   async signinUser() {
     const { ctx } = this;
@@ -64,16 +65,12 @@ class UserController extends Controller {
       },
     };
 
-
     // 拿到验证结果
     const validateResult = await ctx.validate(rule, ctx.params);
     // 验证不通过时，阻止后面的代码执行
     if (!validateResult) return;
 
-    console.log('====================================');
-    console.log(ctx.header);
-    console.log('====================================');
-    const authToken = ctx.header.authorization;
+    const authToken = ctx.header.token;
     const getCode = await ctx.service.redis.get(authToken);
 
     if (ctx.params.code !== getCode) {

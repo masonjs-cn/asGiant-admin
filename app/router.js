@@ -9,7 +9,7 @@ module.exports = app => {
   router.get('/addUser', controller.home.addUser);
   router.get('/user/code', controller.user.code); // 获取图片
   router.get('/user/signup', controller.user.signup);// 注册
-  router.get('/user/signinUser', controller.user.signinUser); // 登录
+  router.post('/user/signinUser', controller.user.signinUser); // 登录
 
 
 };
