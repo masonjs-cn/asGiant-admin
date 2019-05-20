@@ -40,6 +40,9 @@ const user = {
         token: getStore({ name: 'token' }) || '',
     },
     actions: {
+        LoginCode({commit},token){
+            commit('SET_TOKEN', token);
+        },
         //根据用户名登录
         LoginByUsername({ commit }, userInfo) {
             const user = encryption({
@@ -51,7 +54,7 @@ const user = {
             return new Promise((resolve) => {
                 loginByUsername(user.username, user.password, userInfo.code, userInfo.redomStr).then(res => {
                     const data = res.data.data;
-                    commit('SET_TOKEN', data);
+                    // commit('SET_TOKEN', data);
                     commit('DEL_ALL_TAG');
                     commit('CLEAR_LOCK');
                     resolve();

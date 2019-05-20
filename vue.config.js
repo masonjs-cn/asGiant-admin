@@ -1,7 +1,7 @@
 // 基础路径 注意发布之前要先修改这里
 'use strict';
 const Urls = {
-  test: 'http://47.99.152.132:8104',
+  test: 'http://127.0.0.1:7001',
   online: 'http://47.99.191.234:8104',
 };
 
@@ -58,11 +58,11 @@ module.exports = {
     open: true, // 配置自动启动浏览器
     // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
     proxy: {
-      '/fengchi': {
+      '/daili': {
         target: Urls.test,
         ws: true,
         pathRewrite: {
-          '^/fengchi': '',
+          '^/daili': '',
           changeOrigin: true,
         },
       },

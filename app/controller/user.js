@@ -11,10 +11,13 @@ class UserController extends Controller {
     const captcha = svgCaptcha.create({
       size: 4,
       fontSize: 50,
-      noise: 3,
+      noise: 1, // 干扰线条的数量
       width: 120,
       height: 34,
-      background: '#ffffff',
+      inverse: false,
+      // background: '#ffffff',
+      // color: false, // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有
+      ignoreChars: '0o1i',
     });
     const token = tool.generateUUID();
     const topNav = await ctx.service.redis.get(token);
@@ -72,8 +75,7 @@ class UserController extends Controller {
 
     const authToken = ctx.header.token;
     const getCode = await ctx.service.redis.get(authToken);
-
-    if (ctx.params.code !== getCode) {
+    if (ctx.params.code.toUpperCase() !== getCode.toUpperCase()) {
       tool.error(ctx, '验证码错误');
       return;
     }
