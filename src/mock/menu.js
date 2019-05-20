@@ -14,64 +14,64 @@ const first =[
 {
     label: "数据库管理",
     path: '/database',
-    component: 'views/util/cache',
+    component: 'views/database/index',
     icon: 'icon-caidan',
     children: []
 },{
     label: "用户",
-    path: '/error',
+    path: '/user',
     icon: 'icon-caidan',
     children: [{
         label: "用户管理",
-        path: 'error',
-        component: 'components/error-page/403',
+        path: 'usermanage',
+        component: 'views/user/usermanage/index',
         icon: 'icon-caidan',
         children: []
     }, {
         label: "角色管理",
-        path: '404',
-        component: 'components/error-page/404',
+        path: 'roleList',
+        component: 'views/user/roleList/index',
         icon: 'icon-caidan',
         children: []
     }]
 },{
     label: "数据词典",
     path: '/dataDictionary',
-    component: 'views/util/cache',
+    component: 'views/dataDictionary/index',
     icon: 'icon-caidan',
     children: []
 },{
     label: "模板模块",
     path: '/template',
-    component: 'views/util/cache',
+    component: 'views/dataDictionary/index',
     icon: 'icon-caidan',
     children: []
 },{
     label: "系统设置",
-    path: '/program',
+    path: '/system',
     icon: 'icon-caidan',
     children: [{
         label: "短信管理",
-        path: 'error',
-        component: 'components/error-page/403',
+        path: 'sms',
+        component: 'views/system/sms/index',
         icon: 'icon-caidan',
         children: []
     }, {
         label: "邮箱管理",
-        path: '404',
-        component: 'components/error-page/404',
+        path: 'email',
+        component: 'views/system/email/index',
         icon: 'icon-caidan',
         children: []
     }, {
         label: "图片管理",
-        path: '404',
-        component: 'components/error-page/404',
+        path: 'image',
+        component: 'views/system/image/index',
         icon: 'icon-caidan',
         children: []
     }, {
         label: "文件管理",
-        path: '404',
-        component: 'components/error-page/404',
+        path: 'file',
+        component: 'views/system/file/index',
         icon: 'icon-caidan',
         children: []
     }]

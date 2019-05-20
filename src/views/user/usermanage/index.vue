@@ -1,6 +1,7 @@
 <template>
   <section>
     <el-card class="box-card">
+      <h3>用户管理</h3>
       <avue-crud :option="option"
                  :data="data" 
                  :page="page"
