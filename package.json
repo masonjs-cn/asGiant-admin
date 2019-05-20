@@ -34,7 +34,7 @@
     "egg-redis": "^2.3.2",
     "egg-scripts": "^2.11.0",
     "egg-validate-plus": "^1.1.6",
-    "element-ui": "^2.4.5",
+    "element-ui": "^2.8.2",
     "js-cookie": "^2.2.0",
     "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
