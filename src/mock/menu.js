@@ -1,5 +1,4 @@
 import Mock from 'mockjs'
-import { ssrCompileToFunctions } from '_vue-template-compiler@2.6.10@vue-template-compiler';
 const top = [{
     label: "首页",
     path: "/wel/index",

@@ -26,7 +26,15 @@ exports.validatePlus = {
   package: 'egg-validate-plus',
 };
 
+// 连接redis
 exports.redis = {
   enable: true,
   package: 'egg-redis',
 };
+
+// 跨域请求
+exports.cors = {
+  enable: true,
+  package: 'egg-cors',
+};
+

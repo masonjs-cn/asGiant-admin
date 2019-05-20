@@ -12,10 +12,6 @@ module.exports = appInfo => {
    **/
   const config = exports = {};
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1558080102448_6969';
-
-  // add your middleware config here
-  config.middleware = [];
 
   config.view = {
     mapping: {
@@ -29,6 +25,7 @@ module.exports = appInfo => {
       options: {},
     },
   };
+
   config.redis = {
     client: {
       port: 6380, // Redis port
@@ -38,10 +35,28 @@ module.exports = appInfo => {
     },
   };
 
+  // 跨域配置
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true,
+    },
+    domainWhiteList: [ '*' ],
+    // domainWhiteList: [ 'http://www.baidu.com', 'http://localhost:8080' ], // 配置白名单
+  };
+
+  config.cors = { // 解决跨域访问
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+    credentials: true,
+    origin: '*', // 这边不能为*号，需要指定明确的、与请求网页一致的域名
+  };
+
   // 中间件
   config.middleware = [
     'params',
   ];
+
+  config.keys = appInfo.name + '_1558080102448_6969';
 
   // 校验机制
   config.validatePlus = {
