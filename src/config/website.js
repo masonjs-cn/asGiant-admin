@@ -2,10 +2,10 @@
  * 全局配置文件
  */
 export default {
-    title: "运营工具集",
-    logo: "P",
-    key: 'pushHub', //配置主键,目前用于存储
-    indexTitle: '运营工具集',
+    title: "AsGiant",
+    logo: "A",
+    key: 'asGiant', //配置主键,目前用于存储
+    indexTitle: 'AsGiant',
     lockPage: '/lock',
     tokenTime: 6000,
     //http的status默认放行不才用统一处理的,

@@ -1,6 +1,6 @@
 export default {
   tip: '提示',
-  title: '运营工具集',
+  title: 'AsGiant',
   logoutTip: '退出系统, 是否继续?',
   submitText: '确定',
   cancelText: '取消',
@@ -69,7 +69,7 @@ export default {
   },
   login: {
     title: '登录 ',
-    info: '运营工具集',
+    info: '站在巨人的肩膀上',
     username: '请输入账号',
     password: '请输入密码',
     wechat: '微信',

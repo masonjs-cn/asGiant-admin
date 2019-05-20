@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+import { ssrCompileToFunctions } from '_vue-template-compiler@2.6.10@vue-template-compiler';
 const top = [{
     label: "首页",
     path: "/wel/index",
@@ -9,142 +10,211 @@ const top = [{
     parentId: 0
 }]
 
-const first = [{
-    label: "缓冲",
-    path: '/cache',
+const first =[
+{
+    label: "数据库管理",
+    path: '/database',
     component: 'views/util/cache',
     icon: 'icon-caidan',
-    meta: {
-        i18n: 'cache',
-        keepAlive: true
-    },
     children: []
-}, {
-    label: "标签",
-    path: '/tags',
-    component: 'views/util/tags',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'tags',
-    },
-    children: []
-}, {
-    label: "存储",
-    path: '/store',
-    component: 'views/util/store',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'store',
-    },
-    children: []
-}, {
-    label: "全局函数",
-    path: 'https://avuex.avue.top/$/doc/api',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'api',
-    },
-    children: []
-}, {
-    label: "日志监控",
-    path: '/logs',
-    component: 'views/util/logs',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'logs',
-    },
-    children: []
-}, {
-    label: "表格",
-    path: '/table',
-    component: 'views/util/table',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'table',
-    },
-    children: []
-}, {
-    label: "表单",
-    path: '/form',
-    component: 'views/util/form',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'form'
-    },
-    children: []
-}, {
-    label: "权限",
-    path: '/permission',
-    component: 'views/util/permission',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'permission',
-    },
-    children: []
-}, {
-    label: "返回顶部",
-    path: '/top',
-    component: 'views/util/top',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'top',
-    },
-    children: []
-}, {
-    label: "表格表单",
-    path: '/crud-form',
-    component: 'views/util/crud-form',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'crudForm',
-    },
-    children: []
-}, {
-    label: "图钉",
-    path: '/affix',
-    component: 'views/util/affix',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'affix',
-    },
-    children: []
-},
-{
-    label: "数据展示",
-    path: '/data',
-    component: 'views/util/data',
-    icon: 'icon-caidan',
-    meta: {
-        i18n: 'data',
-    },
-    children: []
-}, {
-    label: "异常页",
+},{
+    label: "用户",
     path: '/error',
-    meta: {
-        i18n: 'error',
-    },
     icon: 'icon-caidan',
     children: [{
-        label: "403",
+        label: "用户管理",
         path: 'error',
         component: 'components/error-page/403',
         icon: 'icon-caidan',
         children: []
     }, {
-        label: "404",
+        label: "角色管理",
+        path: '404',
+        component: 'components/error-page/404',
+        icon: 'icon-caidan',
+        children: []
+    }]
+},{
+    label: "数据词典",
+    path: '/dataDictionary',
+    component: 'views/util/cache',
+    icon: 'icon-caidan',
+    children: []
+},{
+    label: "模板模块",
+    path: '/template',
+    component: 'views/util/cache',
+    icon: 'icon-caidan',
+    children: []
+},{
+    label: "系统设置",
+    path: '/program',
+    icon: 'icon-caidan',
+    children: [{
+        label: "短信管理",
+        path: 'error',
+        component: 'components/error-page/403',
+        icon: 'icon-caidan',
+        children: []
+    }, {
+        label: "邮箱管理",
         path: '404',
         component: 'components/error-page/404',
         icon: 'icon-caidan',
         children: []
     }, {
-        label: "500",
-        path: '500',
-        component: 'components/error-page/500',
+        label: "图片管理",
+        path: '404',
+        component: 'components/error-page/404',
+        icon: 'icon-caidan',
+        children: []
+    }, {
+        label: "文件管理",
+        path: '404',
+        component: 'components/error-page/404',
         icon: 'icon-caidan',
         children: []
     }]
+    
 }]
+
+// const first = [{
+//     label: "数据词典",
+//     path: '/cache',
+//     component: 'views/util/cache',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'cache',
+//         keepAlive: true
+//     },
+//     children: []
+// }, {
+//     label: "标签",
+//     path: '/tags',
+//     component: 'views/util/tags',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'tags',
+//     },
+//     children: []
+// }, {
+//     label: "存储",
+//     path: '/store',
+//     component: 'views/util/store',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'store',
+//     },
+//     children: []
+// }, {
+//     label: "全局函数",
+//     path: 'https://avuex.avue.top/$/doc/api',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'api',
+//     },
+//     children: []
+// }, {
+//     label: "日志监控",
+//     path: '/logs',
+//     component: 'views/util/logs',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'logs',
+//     },
+//     children: []
+// }, {
+//     label: "表格",
+//     path: '/table',
+//     component: 'views/util/table',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'table',
+//     },
+//     children: []
+// }, {
+//     label: "表单",
+//     path: '/form',
+//     component: 'views/util/form',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'form'
+//     },
+//     children: []
+// }, {
+//     label: "权限",
+//     path: '/permission',
+//     component: 'views/util/permission',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'permission',
+//     },
+//     children: []
+// }, {
+//     label: "返回顶部",
+//     path: '/top',
+//     component: 'views/util/top',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'top',
+//     },
+//     children: []
+// }, {
+//     label: "表格表单",
+//     path: '/crud-form',
+//     component: 'views/util/crud-form',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'crudForm',
+//     },
+//     children: []
+// }, {
+//     label: "图钉",
+//     path: '/affix',
+//     component: 'views/util/affix',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'affix',
+//     },
+//     children: []
+// },
+// {
+//     label: "数据展示",
+//     path: '/data',
+//     component: 'views/util/data',
+//     icon: 'icon-caidan',
+//     meta: {
+//         i18n: 'data',
+//     },
+//     children: []
+// },
+// {
+//     label: "异常页",
+//     path: '/error',
+//     meta: {
+//         i18n: 'error',
+//     },
+//     icon: 'icon-caidan',
+//     children: [{
+//         label: "403",
+//         path: 'error',
+//         component: 'components/error-page/403',
+//         icon: 'icon-caidan',
+//         children: []
+//     }, {
+//         label: "404",
+//         path: '404',
+//         component: 'components/error-page/404',
+//         icon: 'icon-caidan',
+//         children: []
+//     }, {
+//         label: "500",
+//         path: '500',
+//         component: 'components/error-page/500',
+//         icon: 'icon-caidan',
+//         children: []
+//     }]
+// }]
 
 export default ({ mock }) => {
     if (!mock) return;
