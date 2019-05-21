@@ -1,4 +1,4 @@
-import { setToken, removeToken } from '@/util/auth'
+import { setToken, removeToken,removeImgToken} from '@/util/auth'
 import { setStore, getStore } from '@/util/store'
 import { isURL, validatenull } from '@/util/validate'
 import { encryption, deepClone } from '@/util/util'
@@ -40,9 +40,6 @@ const user = {
         token: getStore({ name: 'token' }) || '',
     },
     actions: {
-        LoginCode({commit},token){
-            commit('SET_TOKEN', token);
-        },
         //根据用户名登录
         LoginByUsername({ commit }, userInfo) {
             const user = encryption({
@@ -52,13 +49,12 @@ const user = {
                 param: ['useranme', 'password']
             });
             return new Promise((resolve) => {
-                loginByUsername(user.username, user.password, userInfo.code, userInfo.redomStr).then(res => {
-                    const data = res.data.data;
-                    // commit('SET_TOKEN', data);
+                // loginByUsername(user.username, user.password, userInfo.code, userInfo.redomStr).then(res => {
+                    commit('SET_TOKEN', userInfo.token);
                     commit('DEL_ALL_TAG');
                     commit('CLEAR_LOCK');
                     resolve();
-                })
+                // })
             })
         },
         //根据手机号登录
@@ -151,6 +147,7 @@ const user = {
     },
     mutations: {
         SET_TOKEN: (state, token) => {
+            removeImgToken()
             setToken(token)
             state.token = token;
             setStore({ name: 'token', content: state.token, type: 'session' })

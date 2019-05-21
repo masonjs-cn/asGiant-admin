@@ -65,6 +65,7 @@
 import * as user from '@/api/user';
 import { randomLenNum } from "@/util/util";
 import { mapGetters } from "vuex";
+import { setImgToken } from '@/util/auth'
 export default {
   name: "userlogin",
   data() {
@@ -121,7 +122,7 @@ export default {
       user.code().then(data=>{
         const res = data.data;
         this.code.src=res.img
-        this.$store.dispatch('LoginCode',res.token)
+        setImgToken(res.token)
       })
     },
     showPassword() {

@@ -1,4 +1,5 @@
 import request from '@/router/axios';
+import { getImgToken } from '@/util/auth'
 import {
     baseUrl,
     myUrl
@@ -14,7 +15,8 @@ export const signinUser = (page) => request({
     method: 'post',
     data:page,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'imgToken': getImgToken()
     }
 })
 

@@ -19,18 +19,18 @@ class UserController extends Controller {
       // color: false, // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有
       ignoreChars: '0o1i',
     });
-    const token = tool.generateUUID();
-    const topNav = await ctx.service.redis.get(token);
+    const imgtoken = tool.generateUUID();
+    const topNav = await ctx.service.redis.get(imgtoken);
 
     if (!topNav) {
-      await this.ctx.service.redis.set(token, captcha.text, 1000);
+      await this.ctx.service.redis.set(imgtoken, captcha.text, 1000);
     }
 
     // 设置响应头
     ctx.response.type = 'image/svg+xml';
     ctx.body = {
       img: captcha.data,
-      token,
+      token: imgtoken,
     };
   }
 
@@ -73,7 +73,7 @@ class UserController extends Controller {
     // 验证不通过时，阻止后面的代码执行
     if (!validateResult) return;
 
-    const authToken = ctx.header.token;
+    const authToken = ctx.header.imgtoken;
     const getCode = await ctx.service.redis.get(authToken);
     if (ctx.params.code.toUpperCase() !== getCode.toUpperCase()) {
       tool.error(ctx, '验证码错误');
@@ -86,7 +86,21 @@ class UserController extends Controller {
     } = ctx.params;
 
     const userInfo = await this.service.user.findUser({ username: userName });
-    userInfo.password === userPass ? tool.success(ctx, '登录成功') : tool.error(ctx, '登录失败');
+    if (userInfo.password === userPass) {
+      const token = tool.generateUUID();
+      const topNav = await ctx.service.redis.get(token);
+      if (!topNav) {
+        await this.ctx.service.redis.set(token, '成功', 1000);
+      }
+      tool.success(ctx, '登录成功');
+      ctx.body = {
+        code: 0,
+        message: '登录成功',
+        token,
+      };
+      return;
+    }
+    tool.error(ctx, '登录失败');
 
   }
 
