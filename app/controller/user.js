@@ -86,6 +86,9 @@ class UserController extends Controller {
     } = ctx.params;
 
     const userInfo = await this.service.user.findUser({ username: userName });
+    if (userInfo) {
+      tool.error(ctx, '登录失败');
+    }
 
     if (userInfo.password === userPass) {
       const token = tool.generateUUID();
@@ -101,6 +104,7 @@ class UserController extends Controller {
       };
       return;
     }
+
     tool.error(ctx, '登录失败');
 
   }
