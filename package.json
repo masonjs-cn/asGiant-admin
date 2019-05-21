@@ -37,7 +37,6 @@
     "egg-validate-plus": "^1.1.6",
     "element-ui": "^2.8.2",
     "js-cookie": "^2.2.0",
-    "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
     "script-loader": "^0.7.2",
     "svg-captcha": "^1.4.0",

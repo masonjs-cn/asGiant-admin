@@ -45,9 +45,6 @@ module.exports = {
     entry
       .add('classlist-polyfill')
       .end();
-    entry
-      .add('@/mock')
-      .end();
   },
   transpileDependencies: [ 'avue-plugin-transfer', 'avue-plugin-ueditor' ],
   // 配置转发代理
