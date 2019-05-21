@@ -86,7 +86,7 @@ class UserController extends Controller {
     } = ctx.params;
 
     const userInfo = await this.service.user.findUser({ username: userName });
-    if (userInfo) {
+    if (!userInfo) {
       tool.error(ctx, '登录失败');
     }
 
