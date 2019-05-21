@@ -143,6 +143,7 @@ export default {
                 });
                 return
               }
+              this.refreshCode();
               this.$message({
                 type: 'error',
                 message: res.data.message

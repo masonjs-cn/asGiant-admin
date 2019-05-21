@@ -16,7 +16,7 @@ export const signinUser = (page) => request({
     data:page,
     headers: {
         'Content-Type': 'application/json',
-        'imgToken': getImgToken()
+        'imgtoken': getImgToken()
     }
 })
 
