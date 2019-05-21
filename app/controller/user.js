@@ -87,7 +87,8 @@ class UserController extends Controller {
 
     const userInfo = await this.service.user.findUser({ username: userName });
     if (!userInfo) {
-      tool.error(ctx, '登录失败');
+      tool.error(ctx, '用户名或密码错误！');
+      return;
     }
 
     if (userInfo.password === userPass) {
@@ -105,7 +106,7 @@ class UserController extends Controller {
       return;
     }
 
-    tool.error(ctx, '登录失败');
+    tool.error(ctx, '用户名或密码错误！');
 
   }
 
