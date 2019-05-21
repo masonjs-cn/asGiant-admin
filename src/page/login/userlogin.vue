@@ -79,8 +79,8 @@ export default {
     };
     return {
       loginForm: {
-        userName: "admin",
-        userPass: "123456",
+        userName: "",
+        userPass: "",
         code: "",
         redomStr: ""
       },
