@@ -86,9 +86,7 @@ class UserController extends Controller {
     } = ctx.params;
 
     const userInfo = await this.service.user.findUser({ username: userName });
-    console.log('====================================');
-    console.log(userInfo);
-    console.log('====================================');
+
     if (userInfo.password === userPass) {
       const token = tool.generateUUID();
       const topNav = await ctx.service.redis.get(token);

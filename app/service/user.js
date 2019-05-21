@@ -5,9 +5,6 @@ const Service = require('egg').Service;
 class UserService extends Service {
   async findUser(where) {
     const result = await this.ctx.model.User.findOne(where);
-    console.log('====================================');
-    console.log(result);
-    console.log('====================================');
     return result;
   }
 
