@@ -5,70 +5,66 @@ import * as tool from '@/util/tool'
 
 export const userOption = {
     menuAlign: 'center',
+    align: "center",
     border: true,
-    index: true,
-    column: [{
-            label: '角色',
-            prop: 'orgid',
-            maxRow: 4,
-            minRow: 4,
-            span: 24,
-            type: 'select',
-            dicData: [],
-            width: 130
-        },
+    index: false,
+    dialogWidth:"40%",
+    addBtn: false,
+    column: [
+        {
+            label: '用户名',
+            prop: 'username',
+            span:24,
+            width: 180,
+            disabled: true,
+            addDisplay: false,
+            editDisplay: false,
+            overHidden: true,
+            search: true,
+        }, 
         {
             label: '手机号',
             width:150,
             prop: 'ipone',
+            span: 24,
             disabled: true,
-            addDisabled: true,
-            editDisabled: true,
+            addDisplay: false,
+            editDisplay: false,
             overHidden: true
         },
         {
             label: '密码',
             prop: 'password',
+            span: 24,
             disabled: true,
-            editDisabled: true,
+            editDisplay: false,
             hide: true,
             overHidden: true
         },
         {
-            label: '姓名',
-            prop: 'username',
-            width: 100,
-            disabled: true,
-            editDisabled: true,
-            overHidden: true
-        },
-        {
-            label: '昵称',
-            width: 100,
-            prop: 'nickname'
-        },
-        {
             label: '邮箱',
             prop: 'e_mail',
+            span: 24,
             width: 180,
             disabled: true,
-            addDisabled: true,
-            editDisabled: true,
+            addDisplay: true,
+            editDisplay: false,
             overHidden: true
         },
         {
             label: 'ip地址',
             prop: 'last_login_ip',
+            span: 24,
             disabled: true,
-            addDisabled: true,
-            editDisabled: true,
+            addDisplay: true,
+            editDisplay: false,
             overHidden: true,
             width: 130,
-            span: 12
         },
         {
             label: '最后登录',
             prop: 'last_login_time',
+            span: 24,
             type: "time",
             disabled: true,
             addDisplay: false,
@@ -80,28 +76,16 @@ export const userOption = {
             label: '冻结',
             prop: 'freeze',
             type: 'select',
+            span: 24,
             maxRow: 4,
             minRow: 4,
-            span: 12,
             dicData: [{
                 label: '正常使用',
-                value: 0
+                value: "0"
             }, {
                 label: '冻结',
-                value: 1
+                value: "1"
             }]
-        },
-        {
-            label: '用户id',
-            prop: 'rid',
-            disabled: true,
-            addDisabled: true,
-            editDisabled: true,
-            overHidden: true,
-            maxRow: 4,
-            minRow: 4,
-            span: 12,
-            width: 180,
         }
     ]
 }

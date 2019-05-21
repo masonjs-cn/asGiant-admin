@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="wel__header">
+     <basic-container>
+       欢迎使用asGiant!
+     </basic-container>
+    <!-- <div class="wel__header">
       <div class="wel__info">
         <img :src="userInfo.avatar"
              alt=""
@@ -64,7 +67,7 @@
       <avue-crud :option="option4"
                  :data="data">
       </avue-crud>
-    </basic-container>
+    </basic-container> -->
   </div>
 </template>
 

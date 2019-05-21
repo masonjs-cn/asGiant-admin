@@ -104,7 +104,7 @@ export default {
               this.refreshLock = false;
             });
         }
-      }, 1000);
+      }, 10000);
     }
   }
 };

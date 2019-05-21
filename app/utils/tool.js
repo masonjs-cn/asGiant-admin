@@ -41,10 +41,20 @@ const error = (ctx, message) => {
   };
 };
 
+const list = (ctx, list, currentPage, total) => {
+  ctx.body = {
+    code: 0,
+    list,
+    currentPage,
+    total,
+  };
+};
+
 module.exports = {
   createCode,
   expire,
   success,
   error,
+  list,
   generateUUID,
 };

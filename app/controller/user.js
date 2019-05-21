@@ -4,6 +4,8 @@ const Controller = require('egg').Controller;
 const tool = require('../utils/tool.js');
 const svgCaptcha = require('svg-captcha'); // 验证码图生成
 class UserController extends Controller {
+
+  // 图片验证码
   async code() {
 
     const { ctx } = this;
@@ -37,6 +39,7 @@ class UserController extends Controller {
   // 注册
   async signup() {
     const { ctx } = this;
+    await this.service.user.addUser();
 
     tool.success(ctx, '登录成功');
     // const {
@@ -45,7 +48,6 @@ class UserController extends Controller {
     //   code, // 验证码
     // } = ctx.params;
   }
-
 
   // 登录
   async signinUser() {
@@ -109,6 +111,51 @@ class UserController extends Controller {
     tool.error(ctx, '用户名或密码错误！');
 
   }
+
+  // 退出登录
+  async exit() {
+    const {
+      ctx,
+    } = this;
+
+    tool.success(ctx, '登录成功');
+    // const {
+    //   userName, // 用户名
+    //   password, // 密码
+    //   code, // 验证码
+    // } = ctx.params;
+  }
+
+  // 获取用户信息
+  async getUser() {
+    const {
+      ctx,
+    } = this;
+
+    tool.success(ctx, '登录成功');
+  }
+
+  async getUserList() {
+    const {
+      ctx,
+    } = this;
+
+    const {
+      pageSize,
+      currentPage,
+      username,
+    } = ctx.params;
+
+    const cha = {};
+    if (username) {
+      cha.username = username;
+    }
+
+    const result = await this.service.user.findList(cha, pageSize, currentPage);
+
+    tool.list(ctx, result.list, result.currentPage, result.total);
+  }
+
 
 }
 

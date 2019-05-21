@@ -8,10 +8,23 @@ class UserService extends Service {
     return result;
   }
 
+  async findList(where = {}, pageSize, currentPage) {
+    console.log('====================================');
+    console.log(where);
+    console.log('====================================');
+    const result = {
+      total: await this.ctx.model.User.find(where).count(),
+      list: await this.ctx.model.User.find(where).skip((currentPage - 1) * pageSize).limit(pageSize),
+      currentPage,
+    };
+    return result;
+  }
+
   async addUser() {
     const user = new this.ctx.model.User({
-      username: 'aaa',
-      password: 'bbbb',
+      username: `admin${Math.ceil(Math.random() * 100)}`,
+      password: '666666',
+      freeze: 0,
     });
     user.save();
   }

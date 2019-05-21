@@ -42,7 +42,7 @@ const user = {
         //根据用户名登录
         LoginByUsername({ commit }) {
             return new Promise((resolve) => {
-                    const data = new Date().getTime() + '';
+                    const data = getToken();
                     commit('SET_TOKEN', data);
                     commit('DEL_ALL_TAG');
                     commit('CLEAR_LOCK');

@@ -10,17 +10,15 @@
                  @row-del="handleDel"
                   @row-update="handleUpdate"
                  :table-loading="tableLoading"
-                 @refresh-change="refreshChange">
+                 @refresh-change="refreshChange"
+                 @search-change="searchChange">
       </avue-crud>
     </el-card>
   </section>
 </template>
 
 <script>
-import * as Column from '@/api/column'
-import * as sysJson from '@/const/sysJson'
-
-// import * as dataCenter from '@/api/dataCenter'
+import * as user from '@/api/user'
 import { userOption } from "./option.js";
 export default {
   data () {
@@ -43,22 +41,25 @@ export default {
     onLoad(page) {
       this.page = page
       this.searchForm = page;
-      this.getRoleList();
+      // this.getRoleList();
       this.loadUserList()
     },
     loadUserList () {
+      this.data = []
       this.tableLoading = true
-      this.searchForm = {
-        'currentPage': this.page.currentPage,
-        'pageSize': this.page.pageSize,
-        'classid' : sysJson.sysClassid.userClassid
-      }
-      Column.CheckTable(this.searchForm)
+      this.searchForm.currentPage= this.page.currentPage
+      this.searchForm.pageSize=this.page.pageSize
+      
+      user.getUserList(this.searchForm)
         .then(res => { 
-          this.data = res.data.data
+          this.data = res.data.list
           this.page.total = res.data.total
           this.tableLoading = false
       });
+    },
+    searchChange(params){
+      this.searchForm.username = params.username
+      this.loadUserList()
     },
     getRoleList(){
       let data = {
@@ -97,26 +98,6 @@ export default {
      **/
     handleAdd () {
       this.$refs.crud.rowAdd()
-    },
-    /**
-     * @title 获取数据
-     * @detail 赋值为tableData表格即可
-     *
-     **/
-    handleList () {
-      this.tableLoading = true
-      this.$store
-        .dispatch('GetUserData', { page: `${this.tablePage}` })
-        .then(data => {
-          setTimeout(() => {
-            this.tableData = data.tableData
-            this.page = {
-              total: data.total,
-              pageSize: data.pageSize
-            }
-            this.tableLoading = false
-          }, 1000)
-        })
     },
     /**
      * @title 数据添加

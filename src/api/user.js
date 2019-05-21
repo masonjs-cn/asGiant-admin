@@ -20,6 +20,12 @@ export const signinUser = (page) => request({
     }
 })
 
+export const getUserList = (page) => request({
+    url: myUrl + '/user/getUserList',
+    method: 'post',
+    data: page
+})
+
 // export const loginByUsername = (username, password, code, redomStr) => request({
 //     url: baseUrl + '/user/login',
 //     method: 'post',
