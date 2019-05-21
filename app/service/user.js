@@ -9,9 +9,6 @@ class UserService extends Service {
   }
 
   async findList(where = {}, pageSize, currentPage) {
-    console.log('====================================');
-    console.log(where);
-    console.log('====================================');
     const result = {
       total: await this.ctx.model.User.find(where).count(),
       list: await this.ctx.model.User.find(where).skip((currentPage - 1) * pageSize).limit(pageSize),
