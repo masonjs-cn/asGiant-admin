@@ -1,16 +1,19 @@
 import request from '@/router/axios';
-import { baseUrl, api } from '@/config/env';
+import { getImgToken } from '@/util/auth'
+import {
+    baseUrl,
+    myUrl
+} from '@/config/env';
 
-// 查询所有表接口
-export const CheckTableList = (page) => request({
-    url: baseUrl + api + '/Column/CheckTableList',
+
+export const getColumnList = (page) => request({
+    url: myUrl + '/column/getColumnList',
     method: 'post',
     data: page
 })
 
-// 查询表
-export const CheckTable = (page) => request({
-    url: baseUrl + api + '/Column/CheckTable',
+export const addColumn = (page) => request({
+    url: myUrl + '/column/addColumn',
     method: 'post',
     data: page
-});
+})

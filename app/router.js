@@ -15,4 +15,7 @@ module.exports = app => {
   router.post('/role/getRoleList', controller.role.getRoleList); // 增加角色
   router.post('/role/addRole', controller.role.addRole); // 获取所有的用户
 
+  router.post('/column/getColumnList', controller.column.getColumnList); // 增加角色
+  router.post('/column/addColumn', controller.column.addColumn); // 获取所有的用户
+
 };

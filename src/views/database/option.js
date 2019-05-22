@@ -10,13 +10,13 @@ export const userOption = {
     dialogWidth: "40%",
     dialogHeight:"300",
     column: [{
-            label: '角色',
-            prop: 'role',
+            label: '数据库',
+            prop: 'column',
             span: 24,
         },
         {
-            label: '角色名称',
-            prop: 'roleName',
+            label: '数据库名称',
+            prop: 'columnName',
             span: 24,
         }, {
             label: '备注',

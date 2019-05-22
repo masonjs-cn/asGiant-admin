@@ -99,12 +99,6 @@ export const authMenu = [{
     children: [],
   }],
 }, {
-  label: '数据词典',
-  path: '/dataDictionary',
-  component: 'views/dataDictionary/index',
-  icon: 'icon-cidiandictionary',
-  children: [],
-}, {
   label: '模板模块',
   path: '/template',
   component: 'views/dataDictionary/index',
