@@ -20,7 +20,7 @@ class RoleController extends Controller {
       cha.username = username;
     }
 
-    const result = await this.service.Role.findList(cha, pageSize, currentPage);
+    const result = await this.service.role.findList(cha, pageSize, currentPage);
 
     tool.list(ctx, result.list, result.currentPage, result.total);
   }

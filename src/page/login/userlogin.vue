@@ -121,7 +121,7 @@ export default {
     refreshCode() {
       user.code().then(data=>{
         const res = data.data;
-        loginForm.code = ''
+        this.loginForm.code = ''
         this.code.src=res.img
         setImgToken(res.token)
       })

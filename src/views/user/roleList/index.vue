@@ -10,17 +10,15 @@
                  @row-del="handleDel"
                   @row-update="handleUpdate"
                  :table-loading="tableLoading"
-                 @refresh-change="refreshChange">
+                 @refresh-change="refreshChange"
+                 @search-change="searchChange">
       </avue-crud>
     </el-card>
   </section>
 </template>
 
 <script>
-import * as Column from '@/api/column'
-import * as sysJson from '@/const/sysJson'
-
-// import * as dataCenter from '@/api/dataCenter'
+import * as role from '@/api/role'
 import { userOption } from "./option.js";
 export default {
   data () {
@@ -43,51 +41,33 @@ export default {
     onLoad(page) {
       this.page = page
       this.searchForm = page;
-      // this.getRoleList();
-      this.loadUserList()
+      this.loadRoleList()
     },
-    loadUserList () {
+    loadRoleList () {
+      this.data = []
       this.tableLoading = true
-      this.searchForm = {
-        'currentPage': this.page.currentPage,
-        'pageSize': this.page.pageSize,
-        'classid' : sysJson.sysClassid.role_dictionaryClassid
-      }
-      Column.CheckTable(this.searchForm)
+      this.searchForm.currentPage= this.page.currentPage
+      this.searchForm.pageSize=this.page.pageSize
+      
+      role.getRoleList(this.searchForm)
         .then(res => { 
-          this.data = res.data.data
+          this.data = res.data.list
           this.page.total = res.data.total
           this.tableLoading = false
       });
     },
-    // getRoleList(){
-    //   let data = {
-    //     'currentPage': 1,
-    //     'pageSize': 1000,
-    //     'classid' : sysJson.sysClassid.role_dictionaryClassid
-    //   }
-    //   Column.CheckTable(data)
-    //   .then(res => { 
-    //     res = res.data.data
-    //     let roleList = []
-    //     for (let index = 0; index < res.length; index++) {
-    //       roleList.push({
-    //         label: res[index].roleName,
-    //         value: res[index].roleid,
-    //       })
-    //     }
-    //     this.option.column[0].dicData = roleList
-    //     this.tableLoading = false
-    //   })
-    // },
+    searchChange(params){
+      // this.searchForm.username = params.username
+      this.loadRoleList()
+    },
     sizeChange (val) {
       this.page.pageSize = val
-      this.loadUserList()
+      this.loadRoleList()
       // this.$message.success("行数" + val);
     },
     currentChange (val) {
       this.page.currentPage = val
-      this.loadUserList()
+      this.loadRoleList()
       this.$message.success('页码' + val)
     },
     /**
@@ -97,26 +77,6 @@ export default {
      **/
     handleAdd () {
       this.$refs.crud.rowAdd()
-    },
-    /**
-     * @title 获取数据
-     * @detail 赋值为tableData表格即可
-     *
-     **/
-    handleList () {
-      this.tableLoading = true
-      this.$store
-        .dispatch('GetUserData', { page: `${this.tablePage}` })
-        .then(data => {
-          setTimeout(() => {
-            this.tableData = data.tableData
-            this.page = {
-              total: data.total,
-              pageSize: data.pageSize
-            }
-            this.tableLoading = false
-          }, 1000)
-        })
     },
     /**
      * @title 数据添加
@@ -184,7 +144,7 @@ export default {
 
     refreshChange () {
       this.searchForm = {}
-      this.loadUserList()
+      this.loadRoleList()
     }
   }
 }
