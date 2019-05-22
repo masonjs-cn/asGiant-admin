@@ -50,4 +50,12 @@ export default [{
         component: () =>
             import( /* webpackChunkName: "views" */ '@/views/user/info')
     }]
+}, {
+    path: '/crud',
+    children: [{
+        path: 'index',
+        name: '万能管理',
+        component: () =>
+            import( /* webpackChunkName: "views" */ '@/views/crud/index')
+    }]
 }]

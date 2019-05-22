@@ -9,6 +9,11 @@ export const userOption = {
     index: true,
     dialogWidth: "40%",
     dialogHeight:"300",
+    headerAlign: 'center',
+    align: 'center',
+    expandAll: false,
+    expandLevel: 2,
+    tree:true,
     column: [{
             label: '数据库',
             prop: 'column',
@@ -28,4 +33,47 @@ export const userOption = {
 }
 
 
-
+// option: {
+//   headerAlign: 'center',
+//   align: 'center',
+//   expandAll: false,
+//   expandLevel: 2,
+//   tree:true,
+//   border: true,
+//   index: true,
+//   column: [
+//     {
+//       label: '事件',
+//       prop: 'event',
+//       align: 'left',
+//       width: 200
+//     },
+//     {
+//       label: 'ID',
+//       prop: 'id',
+//       dicData: [{
+//         label: '零',
+//         value: 0
+//       }, {
+//         label: '一',
+//         value: 1
+//       }, {
+//         label: '二',
+//         value: 2,
+//       }]
+//     },
+//     {
+//       label: '时间线',
+//       prop: 'timeLine'
+//     },
+//     {
+//       label: '自定义图标',
+//       prop: 'icon',
+//       slot: true,
+//     },
+//     {
+//       label: '备注',
+//       prop: 'comment'
+//     }
+//   ],
+// },
