@@ -17,12 +17,26 @@ class RoleService extends Service {
     return result;
   }
 
-  async addRole() {
-    const user = new this.ctx.model.Role({
-      roleName: '超级管理员',
-      note: '拥有至高无上的权利',
+  async addRole(roleInfo) {
+    const Info = new this.ctx.model.Role(roleInfo);
+    return new Promise((resolve, reject) => {
+      try {
+        this.ctx.model.Role.create(Info, err => {
+          if (err) {
+            resolve({
+              code: 1,
+              message: '角色名不能重复',
+            });
+          }
+          resolve({
+            code: 0,
+            message: '添加成功',
+          });
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
-    user.save();
   }
 
   async updateRole() {

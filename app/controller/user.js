@@ -161,9 +161,9 @@ class UserController extends Controller {
     const {
       ctx,
     } = this;
-    await this.service.role.addRole();
 
-    tool.success(ctx, '登录成功');
+    ctx.body = await this.service.role.addRole(ctx.params);
+
   }
 
 }

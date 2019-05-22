@@ -3,6 +3,13 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const RoleSchema = new Schema({
+    role: {
+      type: String,
+      index: {
+        unique: true,
+      },
+      require: true,
+    },
     roleName: {
       type: String,
       unqiue: true,

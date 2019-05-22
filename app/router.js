@@ -11,6 +11,8 @@ module.exports = app => {
   router.get('/user/signup', controller.user.signup);// 注册
   router.post('/user/signinUser', controller.user.signinUser); // 登录
   router.post('/user/getUserList', controller.user.getUserList);// 获取所有的用户
-  router.post('/user/addRole', controller.user.addRole); // 获取所有的用户
+
+  router.post('/role/getRoleList', controller.role.getRoleList); // 增加角色
+  router.post('/role/addRole', controller.role.addRole); // 获取所有的用户
 
 };
