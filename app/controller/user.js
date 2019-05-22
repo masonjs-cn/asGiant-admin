@@ -99,7 +99,9 @@ class UserController extends Controller {
       tool.error(ctx, '账户已经被冻结');
       return;
     }
-
+    console.log('====================================');
+    console.log(ctx);
+    console.log('====================================');
     // 判断密码是否输入的正确
     if (userInfo.password === userPass) {
       await this.service.user.updateUserTime({ username: userName }, {

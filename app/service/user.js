@@ -36,9 +36,6 @@ class UserService extends Service {
   }
 
   async updateUserTime(key, value) {
-    console.log('====================================');
-    console.log(key);
-    console.log(value);
     const result = await this.ctx.model.User.updateOne(key, value);
     return result;
   }
