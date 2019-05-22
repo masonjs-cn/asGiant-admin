@@ -156,6 +156,15 @@ class UserController extends Controller {
     tool.list(ctx, result.list, result.currentPage, result.total);
   }
 
+  // 增加角色
+  async addRole() {
+    const {
+      ctx,
+    } = this;
+    await this.service.role.addRole();
+
+    tool.success(ctx, '登录成功');
+  }
 
 }
 

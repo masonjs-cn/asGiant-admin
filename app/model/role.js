@@ -8,7 +8,8 @@ module.exports = app => {
       unqiue: true,
       require: true,
     },
-    roleid: {
+    // 备注
+    note: {
       type: String,
       require: true,
     },
