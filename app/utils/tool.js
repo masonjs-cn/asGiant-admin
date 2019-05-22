@@ -57,9 +57,6 @@ const getIp = req => {
   if (ip.split(',').length > 0) {
     ip = ip.split(',')[0];
   }
-  console.log('====================================');
-  console.log(ip);
-  console.log('====================================');
   return ip;
 };
 
