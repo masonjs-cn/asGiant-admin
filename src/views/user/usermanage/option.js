@@ -23,6 +23,16 @@ export const userOption = {
             search: true,
         }, 
         {
+            label: '角色',
+            prop: 'role',
+            span: 24,
+            width: 180,
+            disabled: true,
+            addDisplay: true,
+            editDisplay: false,
+            overHidden: true
+        },
+        {
             label: '手机号',
             width:150,
             prop: 'ipone',

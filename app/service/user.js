@@ -35,6 +35,15 @@ class UserService extends Service {
     return result;
   }
 
+  async updateUserTime(key, value) {
+    console.log('====================================');
+    console.log(key);
+    console.log(value);
+    const result = await this.ctx.model.User.updateOne(key, value);
+    return result;
+  }
+
+
   async deleteUser() {
     const result = await this.ctx.model.User.deleteOne({
       _id: '5c00f0ce862e9227acb56d22',

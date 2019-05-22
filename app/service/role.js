@@ -39,21 +39,21 @@ class RoleService extends Service {
     });
   }
 
-  async updateRole() {
-    const result = await this.ctx.model.Role.updateOne({
-      _id: '5c00f0ce862e9227acb56d22',
-    }, {
-      password: 'cccccccccc',
-    });
-    return result;
-  }
+  // async updateRole() {
+  //   const result = await this.ctx.model.Role.updateOne({
+  //     _id: '5c00f0ce862e9227acb56d22',
+  //   }, {
+  //     password: 'cccccccccc',
+  //   });
+  //   return result;
+  // }
 
-  async deleteRole() {
-    const result = await this.ctx.model.Role.deleteOne({
-      _id: '5c00f0ce862e9227acb56d22',
-    });
-    return result;
-  }
+  // async deleteRole() {
+  //   const result = await this.ctx.model.Role.deleteOne({
+  //     _id: '5c00f0ce862e9227acb56d22',
+  //   });
+  //   return result;
+  // }
 }
 
 module.exports = RoleService;

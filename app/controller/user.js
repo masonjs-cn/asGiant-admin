@@ -75,6 +75,7 @@ class UserController extends Controller {
     // 验证不通过时，阻止后面的代码执行
     if (!validateResult) return;
 
+    // 判断图片验证码输入的是否正确
     const authToken = ctx.header.imgtoken;
     const getCode = await ctx.service.redis.get(authToken);
     if (ctx.params.code.toUpperCase() !== getCode.toUpperCase()) {
@@ -87,19 +88,34 @@ class UserController extends Controller {
       userPass,
     } = ctx.params;
 
+    // 得出结论用户根本就不存在
     const userInfo = await this.service.user.findUser({ username: userName });
     if (!userInfo) {
       tool.error(ctx, '用户名或密码错误！');
       return;
     }
 
+    if (userInfo.freeze === '1') {
+      tool.error(ctx, '账户已经被冻结');
+      return;
+    }
+
+    // 判断密码是否输入的正确
     if (userInfo.password === userPass) {
+      await this.service.user.updateUserTime({ username: userName }, {
+        last_login_ip: ctx.ip,
+        last_login_time: Date.parse(new Date()) / 1000,
+      });
+
       const token = tool.generateUUID();
-      const topNav = await ctx.service.redis.get(token);
-      if (!topNav) {
-        await this.ctx.service.redis.set(token, '成功', 1000);
-      }
-      tool.success(ctx, '登录成功');
+      // const topNav = await ctx.service.redis.get(token);
+      // if (!topNav) {
+      // 获取用户的权限，保存起来并且维持一段时间
+      await this.ctx.service.redis.set(userName, {
+        token,
+        role: userInfo.role || 'average_user',
+      }, 10000);
+
       ctx.body = {
         code: 0,
         message: '登录成功',
@@ -135,6 +151,7 @@ class UserController extends Controller {
     tool.success(ctx, '登录成功');
   }
 
+  // 获取用户列表
   async getUserList() {
     const {
       ctx,
