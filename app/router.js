@@ -18,4 +18,5 @@ module.exports = app => {
   router.post('/column/getColumnList', controller.column.getColumnList); // 增加角色
   router.post('/column/addColumn', controller.column.addColumn); // 获取所有的用户
 
+  router.post('/upload', controller.upload.index);
 };

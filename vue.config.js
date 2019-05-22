@@ -17,7 +17,7 @@ module.exports = {
   // 输出文件目录
   outputDir: './app/view',
   //  lintOnSave：{ type:Boolean default:true } 问你是否使用eslint
-  lintOnSave: true,
+  lintOnSave: false,
 
   /* devServer:{type:Object} 3个属性host,port,https
     它支持webPack-dev-server的所有选项 */

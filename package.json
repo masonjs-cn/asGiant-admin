@@ -26,6 +26,7 @@
     "declarations": true
   },
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "classlist-polyfill": "^1.2.0",
@@ -37,8 +38,10 @@
     "egg-validate-plus": "^1.1.6",
     "element-ui": "^2.8.2",
     "js-cookie": "^2.2.0",
+    "md5": "^2.2.1",
     "nprogress": "^0.2.0",
     "script-loader": "^0.7.2",
+    "stream-wormhole": "^1.1.0",
     "svg-captcha": "^1.4.0",
     "vue": "^2.5.16",
     "vue-axios": "^2.1.2",
