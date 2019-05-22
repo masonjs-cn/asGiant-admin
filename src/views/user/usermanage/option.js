@@ -25,12 +25,12 @@ export const userOption = {
         {
             label: '角色',
             prop: 'role',
+            type: 'select',
             span: 24,
             width: 180,
-            disabled: true,
             addDisplay: true,
-            editDisplay: false,
-            overHidden: true
+            overHidden: true,
+            dicData:[]
         },
         {
             label: '手机号',
@@ -87,8 +87,6 @@ export const userOption = {
             prop: 'freeze',
             type: 'select',
             span: 24,
-            maxRow: 4,
-            minRow: 4,
             dicData: [{
                 label: '正常使用',
                 value: "0"

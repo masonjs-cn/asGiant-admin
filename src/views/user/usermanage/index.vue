@@ -19,6 +19,7 @@
 
 <script>
 import * as user from '@/api/user'
+import * as role from '@/api/role'
 import { userOption } from "./option.js";
 export default {
   data () {
@@ -32,7 +33,7 @@ export default {
       },
       data: [],
       option: userOption,
-      searchForm:{}
+      searchForm:{},
     }
   },
   created () {
@@ -41,7 +42,7 @@ export default {
     onLoad(page) {
       this.page = page
       this.searchForm = page;
-      // this.getRoleList();
+      this.getRoleList();
       this.loadUserList()
     },
     loadUserList () {
@@ -63,23 +64,21 @@ export default {
     },
     getRoleList(){
       let data = {
-        'currentPage': 1,
-        'pageSize': 1000,
-        'classid' : sysJson.sysClassid.role_dictionaryClassid
+        currentPage:1,
+        pageSize:1000
       }
-      Column.CheckTable(data)
-      .then(res => { 
-        res = res.data.data
-        let roleList = []
-        for (let index = 0; index < res.length; index++) {
-          roleList.push({
-            label: res[index].roleName,
-            value: res[index].roleid,
-          })
-        }
-        this.option.column[0].dicData = roleList
-        this.tableLoading = false
-      })
+      role.getRoleList(data)
+        .then(res => {
+          let data = res.data.list;
+          let roleList = []
+          data.forEach((element,index) => {
+            roleList[index]={
+              label: element.roleName,
+              value: element.role
+            }
+          });
+          this.option.column[1].dicData = roleList
+      });
     },
     sizeChange (val) {
       this.page.pageSize = val
