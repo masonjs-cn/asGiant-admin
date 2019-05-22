@@ -50,6 +50,19 @@ const list = (ctx, list, currentPage, total) => {
   };
 };
 
+const getIp = req => {
+  let ip = req.headers['x-real-ip'] ||
+    req.headers['x-forwarded-for'] ||
+    req.socket.remoteAddress || '';
+  if (ip.split(',').length > 0) {
+    ip = ip.split(',')[0];
+  }
+  console.log('====================================');
+  console.log(ip);
+  console.log('====================================');
+  return ip;
+};
+
 module.exports = {
   createCode,
   expire,
@@ -57,4 +70,5 @@ module.exports = {
   error,
   list,
   generateUUID,
+  getIp,
 };
