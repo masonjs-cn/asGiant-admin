@@ -8,7 +8,7 @@
           {{time}}
         </div>
         <img class="img"
-             src="https://avuex.avue.top/images/logo.png"
+             src="./logo.png"
              alt="">
         <p class="title">{{ $t('login.info') }}</p>
       </div>
