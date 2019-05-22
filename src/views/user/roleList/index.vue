@@ -57,7 +57,6 @@ export default {
       });
     },
     searchChange(params){
-      // this.searchForm.username = params.username
       this.loadRoleList()
     },
     sizeChange (val) {
