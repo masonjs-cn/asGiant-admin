@@ -111,8 +111,7 @@ class UserController extends Controller {
       // const topNav = await ctx.service.redis.get(token);
       // if (!topNav) {
       // 获取用户的权限，保存起来并且维持一段时间
-      await this.ctx.service.redis.set(userName, {
-        token,
+      await this.ctx.service.redis.set(token, {
         role: userInfo.role || 'average_user',
       }, 10000);
 

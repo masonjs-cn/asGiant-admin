@@ -19,4 +19,7 @@ module.exports = app => {
   router.post('/column/addColumn', controller.column.addColumn); // 获取所有的用户
 
   router.post('/upload', controller.upload.index);
+
+  router.get('/template', controller.template.addHtml);
+
 };
