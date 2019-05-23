@@ -13,7 +13,6 @@ const sendToWormhole = require('stream-wormhole');
 // 当然你也可以不使用这个 哈哈 个人比较赖
 // 还有我们这里使用了egg-multipart
 const md5 = require('md5');
-const crypto = require('crypto');
 
 class UploadController extends Controller {
 

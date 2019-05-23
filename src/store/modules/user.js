@@ -40,10 +40,9 @@ const user = {
     },
     actions: {
         //根据用户名登录
-        LoginByUsername({ commit }) {
+        LoginByUsername({ commit }, userInfo) {
             return new Promise((resolve) => {
-                    const data = getToken();
-                    commit('SET_TOKEN', data);
+                    commit('SET_TOKEN', userInfo.token);
                     commit('DEL_ALL_TAG');
                     commit('CLEAR_LOCK');
                     resolve();
