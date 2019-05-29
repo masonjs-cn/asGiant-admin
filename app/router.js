@@ -16,7 +16,10 @@ module.exports = app => {
   router.post('/column/getColumnList', controller.column.getColumnList); // 增加角色
   router.post('/column/addColumn', controller.column.addColumn); // 获取所有的用户
   router.post('/upload', controller.upload.index); // 上传接口
+
   router.get('/template', controller.template.addHtml); // 创建html
   router.get('/email/emailCode', controller.email.emailCode); // 发送邮箱验证码
+  router.post('/email/addEmail', controller.email.addEmail); // 发送邮箱验证码
+  router.post('/email/getEmailList', controller.email.getEmailList); // 发送邮箱验证码
 
 };

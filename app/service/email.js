@@ -124,6 +124,63 @@ class EmailService extends Service {
     });
   }
 
+  async findEmail(where) {
+    const result = await this.ctx.model.Email.findOne(where);
+    return result;
+  }
+
+  async findList(where = {}, pageSize, currentPage) {
+    const result = {
+      total: await this.ctx.model.Email.find(where).count(),
+      list: await this.ctx.model.Email.find(where).skip((currentPage - 1) * pageSize).limit(pageSize),
+      currentPage,
+    };
+    return result;
+  }
+
+  async addEmail(eMailInfo) {
+    const Info = new this.ctx.model.Email(eMailInfo);
+    return new Promise((resolve, reject) => {
+      try {
+        this.ctx.model.Email.create(Info, err => {
+          if (err) {
+            resolve({
+              code: 1,
+              message: '邮箱名称不能重复',
+            });
+          }
+          resolve({
+            code: 0,
+            message: '添加成功',
+          });
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  async updateEmail() {
+    const result = await this.ctx.model.email.updateOne({
+      _id: '5c00f0ce862e9227acb56d22',
+    }, {
+      password: 'cccccccccc',
+    });
+    return result;
+  }
+
+  async updateEmailTime(key, value) {
+    const result = await this.ctx.model.email.updateOne(key, value);
+    return result;
+  }
+
+  async deleteEmail() {
+    const result = await this.ctx.model.email.deleteOne({
+      _id: '5c00f0ce862e9227acb56d22',
+    });
+    return result;
+  }
+
 }
 
 module.exports = EmailService;

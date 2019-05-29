@@ -8,19 +8,37 @@ class RoleController extends Controller {
     const {
       ctx,
     } = this;
+    const rule = {
+      pageSize: {
+        type: 'number',
+        required: true,
+        message: '请输入正确的输入总条数',
+      },
+      currentPage: {
+        type: 'number',
+        required: true,
+        message: '请正确的输入页数',
+      },
+      check: {
+        type: 'object',
+        message: '请正确的查询的内容',
+      },
+    };
 
-    const {
+    // 拿到验证结果
+    const validateResult = await ctx.validate(rule, ctx.params);
+    // 验证不通过时，阻止后面的代码执行
+    if (!validateResult) return;
+
+    let {
       pageSize,
       currentPage,
-      username,
+      check,
     } = ctx.params;
 
-    const cha = {};
-    if (username) {
-      cha.username = username;
-    }
+    if (!check) check = {};
 
-    const result = await this.service.role.findList(cha, pageSize, currentPage);
+    const result = await this.service.role.findList(check, pageSize, currentPage);
 
     tool.list(ctx, result.list, result.currentPage, result.total);
   }

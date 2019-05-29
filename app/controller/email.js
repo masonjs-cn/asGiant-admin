@@ -95,6 +95,92 @@ class EmailController extends Controller {
 
   }
 
+  // 增加角色
+  async addEmail() {
+    const {
+      ctx,
+    } = this;
+
+    const rule = {
+      e_mailName: {
+        type: 'string',
+        required: true,
+        message: '请输入邮箱名称',
+      },
+      host: {
+        type: 'string',
+        required: true,
+        message: '请输入ip地址',
+      },
+      port: {
+        type: 'number',
+        required: true,
+        message: '请正确输入端口号',
+      },
+      secureConnection: {
+        type: 'boolean',
+        required: true,
+        message: '是否使用了SSL',
+      },
+      user: {
+        type: 'string',
+        required: true,
+        message: '请输入用户名',
+      },
+      pass: {
+        type: 'string',
+        required: true,
+        message: '请输入密码',
+      },
+    };
+
+    // 拿到验证结果
+    const validateResult = await ctx.validate(rule, ctx.params);
+    // 验证不通过时，阻止后面的代码执行
+    if (!validateResult) return;
+
+    ctx.body = await this.service.email.addEmail(ctx.params);
+
+  }
+
+  async getEmailList() {
+    const {
+      ctx,
+    } = this;
+    const rule = {
+      pageSize: {
+        type: 'number',
+        required: true,
+        message: '请输入正确的输入总条数',
+      },
+      currentPage: {
+        type: 'number',
+        required: true,
+        message: '请正确的输入页数',
+      },
+      check: {
+        type: 'object',
+        message: '请正确的查询的内容',
+      },
+    };
+
+    // 拿到验证结果
+    const validateResult = await ctx.validate(rule, ctx.params);
+    // 验证不通过时，阻止后面的代码执行
+    if (!validateResult) return;
+
+    let {
+      pageSize,
+      currentPage,
+      check,
+    } = ctx.params;
+
+    if (!check) check = {};
+
+    const result = await this.service.email.findList(check, pageSize, currentPage);
+
+    tool.list(ctx, result.list, result.currentPage, result.total);
+  }
 
 }
 
