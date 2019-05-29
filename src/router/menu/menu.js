@@ -101,7 +101,7 @@ export const authMenu = [{
 }, {
   label: '邮箱设置',
   path: '/email',
-  icon: 'icon-yonghu',
+  icon: 'icon-youxianggl-copy',
   children: [{
     label: '邮箱配置',
     path: 'config',
