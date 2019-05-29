@@ -1,56 +1,63 @@
 // import {
 //     DIC
 // } from '@/const/dic'
-// import * as tool from '@/util/tool'
+import * as tool from '@/util/tool'
 
-export const userOption = {
+export const emailOption = {
     menuAlign: 'center',
+    align: "center",
     border: true,
-    index: true,
-    column: [{
-            label: '服务器地址',
+    index: false,
+    dialogWidth:"40%",
+    column: [
+        {
+            label: '邮箱名称',
+            prop: 'e_mailName',
+            width: 100,
+            span:24,
+        },
+        {
+            label: 'ip地址',
             prop: 'host',
-            dicData: [],
-            width: 120
-        },{
-            label: '端口',
+            width:150,
+            span: 24,
+        },
+        {
+            label: '端口号',
             prop: 'port',
-            dicData: [],
-            width: 100
-        }, {
-            label: '服务器地址名称',
-            prop: 'hostname',
-            dicData: [],
-            width: 130
-        }, {
-            label: '邮件的标题',
-            prop: 'title',
-            dicData: [],
-            width: 200
-        }, {
-            label: '邮件的内容',
-            prop: 'content',
-            dicData: [],
-        }, {
-            label: '邮件的发件人',
-            prop: 'timu',
-            dicData: [],
-            width: 130
-        }, {
-            label: '邮箱的账户名',
-            prop: 'username',
-            dicData: [],
-            width: 200
-        }, {
-            label: '邮箱的密码',
-            prop: 'password',
-            dicData: [],
-            width: 150
-        }, {
-            label: '有限配置编号',
-            prop: 'e_mailid',
-            dicData: [],
-            width:350
+            span: 24,
+        }, 
+        {
+            label: 'SSL',
+            prop: 'secureConnection',
+            span: 24,
+        },
+        {
+            label: '用户名',
+            prop: 'user',
+            width: 200,
+            span: 24,
+        },
+        {
+            label: '密码',
+            prop: 'pass',
+            width: 130,
+            span: 24,
+        },
+        {
+            label: '邮箱id',
+            prop: 'e_mail_id',
+            width: 320,
+            span: 24,
         },
     ]
 }
+
+
+
+// 请输入邮箱名称
+// 请输入ip地址
+// 请正确输入端口号
+// 是否使用了SSL
+// 请输入用户名
+// 请输入密码

@@ -99,6 +99,17 @@ export const authMenu = [{
     children: [],
   }],
 }, {
+  label: '邮箱设置',
+  path: '/email',
+  icon: 'icon-yonghu',
+  children: [{
+    label: '邮箱配置',
+    path: 'config',
+    component: 'views/system/email/index',
+    icon: 'icon-youxiang',
+    children: [],
+  },],
+}, {
   label: '模板模块',
   path: '/template',
   component: 'views/dataDictionary/index',
@@ -114,13 +125,7 @@ export const authMenu = [{
     component: 'views/system/sms/index',
     icon: 'icon-duanxin',
     children: [],
-  }, {
-    label: '邮箱管理',
-    path: 'email',
-    component: 'views/system/email/index',
-    icon: 'icon-youxiang',
-    children: [],
-  }, {
+  },{
     label: '图片管理',
     path: 'image',
     component: 'views/system/image/index',
@@ -133,6 +138,5 @@ export const authMenu = [{
     icon: 'icon-icon--',
     children: [],
   }],
-
 }]
 ;

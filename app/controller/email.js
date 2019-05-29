@@ -95,8 +95,8 @@ class EmailController extends Controller {
 
   }
 
-  // 增加角色
-  async addEmail() {
+  // 增加邮箱配置
+  async addEmailConfig() {
     const {
       ctx,
     } = this;
@@ -134,6 +134,8 @@ class EmailController extends Controller {
       },
     };
 
+    ctx.params.e_mail_id = tool.generateUUID();
+
     // 拿到验证结果
     const validateResult = await ctx.validate(rule, ctx.params);
     // 验证不通过时，阻止后面的代码执行
@@ -143,7 +145,7 @@ class EmailController extends Controller {
 
   }
 
-  async getEmailList() {
+  async getEmailConfigs() {
     const {
       ctx,
     } = this;

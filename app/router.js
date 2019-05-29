@@ -19,7 +19,7 @@ module.exports = app => {
 
   router.get('/template', controller.template.addHtml); // 创建html
   router.get('/email/emailCode', controller.email.emailCode); // 发送邮箱验证码
-  router.post('/email/addEmail', controller.email.addEmail); // 发送邮箱验证码
-  router.post('/email/getEmailList', controller.email.getEmailList); // 发送邮箱验证码
+  router.post('/email/addEmailConfig', controller.email.addEmailConfig); // 发送邮箱验证码
+  router.post('/email/getEmailConfigs', controller.email.getEmailConfigs); // 发送邮箱验证码
 
 };
