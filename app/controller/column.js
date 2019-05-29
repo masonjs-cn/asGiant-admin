@@ -25,11 +25,33 @@ class ColumnController extends Controller {
     tool.list(ctx, result.list, result.currentPage, result.total);
   }
 
-  // 增加角色
+  // 增加栏目
   async addColumn() {
     const {
       ctx,
     } = this;
+
+    const rule = {
+      column: {
+        type: 'string',
+        required: true,
+        message: '请输入正确的栏目',
+      },
+      columnName: {
+        type: 'string',
+        required: true,
+        message: '请正确的栏目名称',
+      },
+      note: {
+        type: 'string',
+        message: '请正确的备注',
+      },
+    };
+
+    // 拿到验证结果
+    const validateResult = await ctx.validate(rule, ctx.params);
+    // 验证不通过时，阻止后面的代码执行
+    if (!validateResult) return;
 
     ctx.body = await this.service.column.addColumn(ctx.params);
 

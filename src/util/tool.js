@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { Message } from 'element-ui';
+
 export const changeWan = x => {
     x = x / 10000;
     var y = x.toFixed(2) + "万";
@@ -131,3 +133,28 @@ export const timestampToTime = (row, value, label, column) => {
        return new Date(timestamp * 1000).Format('yy-MM-dd hh:mm:ss');
     }
 };
+
+export const fanhui = res => {
+    return new Promise((resolve, reject) => {
+        if (res.data.code===0) {
+            if (res.data.message) {
+                Message({
+                    showClose: true,
+                    message: res.data.message,
+                    type: 'success'
+                })
+            }
+
+            resolve(res.data)
+            return
+        }
+        if (res.data.message) {
+            Message({
+                showClose: true,
+                message: res.data.message,
+                type: 'error'
+            })
+        }
+        resolve(res.data)
+    });
+}

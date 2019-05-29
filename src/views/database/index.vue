@@ -25,6 +25,7 @@
 <script>
 import * as column from '@/api/column'
 import { userOption } from "./option.js";
+import * as tool from '@/util/tool'
 
   export default {
     data(){
@@ -85,8 +86,11 @@ import { userOption } from "./option.js";
         
         column.getColumnList(this.searchForm)
           .then(res => { 
-            this.data = res.data.list
-            this.page.total = res.data.total
+            tool.fanhui(res)
+            .then(data=>{
+              this.data = data.list
+              this.page.total = data.total
+            })
             this.tableLoading = false
         });
       },
@@ -118,23 +122,14 @@ import { userOption } from "./option.js";
        *
        **/
       handleSave (row, done) {
-        // this.tableData.push(row);
         column.addColumn(row)
           .then(res => { 
-            this.data = res.data.list
-            this.page.total = res.data.total
-            this.tableLoading = false
-            this.refreshChange();
-            this.$message({
-              showClose: true,
-              message: '添加成功',
-              type: 'success'
+            tool.fanhui(res)
+            .then(data=>{
+              this.refreshChange();
             })
-
         });
-
         done()
-        
       },
       /**
        * @title 数据删除
