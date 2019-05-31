@@ -2,6 +2,7 @@
 
 'use strict';
 const path = require('path');
+const swagger = require('../app/swagger/index.js');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -73,10 +74,14 @@ module.exports = appInfo => {
     },
   };
 
+  config.swagger2 = swagger.swaggerConfig;
+
   // static
   config.static = {
     prefix: '/',
-    dir: [ path.join(appInfo.baseDir, 'app/view/'), path.join(appInfo.baseDir, 'app/public/uploads/') ],
+    dir: [ path.join(appInfo.baseDir, 'app/view/'),
+      path.join(appInfo.baseDir, 'app/public/uploads/'),
+      path.join(appInfo.baseDir, 'app/public/swagger/') ],
   };
 
   // add your user config here
