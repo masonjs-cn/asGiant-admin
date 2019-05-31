@@ -51,6 +51,16 @@ export default [{
             import( /* webpackChunkName: "views" */ '@/views/user/info')
     }]
 }, {
+    path: '/field',
+    component: Layout,
+    redirect: '/info/index',
+    children: [{
+        path: 'index',
+        name: '字段管理',
+        component: () =>
+            import( /* webpackChunkName: "views" */ '@/views/database/field/index')
+    }]
+}, {
     path: '/crud',
     children: [{
         path: 'index',

@@ -3,23 +3,27 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const SetModelSchema = new Schema({
-    unique: {
+    field: {
+      type: String,
+      index: {
+        unique: true,
+      },
+      require: true,
+    },
+    fieldName: {
       type: String,
       require: true,
     },
-    require: {
+    unique: { // 是否唯一
       type: Boolean,
       require: true,
     },
-    setModel: {
-      type: String,
+    require: { // 是否必填项
+      type: Boolean,
       require: true,
     },
-    setModelName: {
-      type: String,
-      require: true,
-    },
-    type: {
+    // Number（ 数字）， String（ 字符串）， Boolean（ 布尔值）， ObjectId（ 对象ID）， Array（ 数组）， Object（ 对象）， Date（ 日期）
+    type: { // 类型
       type: String,
       require: true,
     },

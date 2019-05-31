@@ -76,11 +76,22 @@
 // }
 
 export const authMenu = [{
+  label: '栏目管理',
+  path: '/database',
+  icon: 'icon-yonghu',
+  children: [{
   label: '数据库管理',
   path: '/database',
-  component: 'views/database/index',
+  component: 'views/database/column/index',
   icon: 'icon-shujukushili',
   children: [],
+}, {
+    label: '菜单管理',
+    path: 'menu',
+    component: 'views/database/menu/index',
+    icon: 'icon-role',
+    children: [],
+  }],
 }, {
   label: '用户',
   path: '/user',
