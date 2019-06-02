@@ -78,7 +78,7 @@
 export const authMenu = [{
   label: '栏目管理',
   path: '/database',
-  icon: 'icon-yonghu',
+  icon: 'icon-lanmuguanli',
   children: [{
   label: '数据库管理',
   path: '/database',
@@ -93,7 +93,7 @@ export const authMenu = [{
     children: [],
   }],
 }, {
-  label: '用户',
+  label: '权限管理',
   path: '/user',
   icon: 'icon-yonghu',
   children: [{
@@ -153,7 +153,7 @@ export const authMenu = [{
 {
   label: "swagger-文档",
   path: 'http://127.0.0.1:7001/swagger/index.html',
-  icon: 'icon-baidu1',
+  icon: 'icon-wendang',
   children: [],
 }]
 ;
