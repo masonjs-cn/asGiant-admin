@@ -2,7 +2,6 @@ import request from '@/router/axios';
 import { getImgToken } from '@/util/auth'
 import {
     baseUrl,
-    myUrl
 } from '@/config/env';
 
 
@@ -17,7 +16,7 @@ import {
 // })
 
 export const getRoleList = (page) => request({
-    url: myUrl + '/role/getRoleList',
+    url: baseUrl + '/role/getRoleList',
     method: 'post',
     data: page
 })

@@ -1,19 +1,18 @@
 import request from '@/router/axios';
 import { getImgToken } from '@/util/auth'
 import {
-    baseUrl,
-    myUrl
+    baseUrl
 } from '@/config/env';
 
 
 export const getColumnList = (page) => request({
-    url: myUrl + '/column/getColumnList',
+    url: baseUrl + '/column/getColumnList',
     method: 'post',
     data: page
 })
 
 export const addColumn = (page) => request({
-    url: myUrl + '/column/addColumn',
+    url: baseUrl + '/column/addColumn',
     method: 'post',
     data: page
 })

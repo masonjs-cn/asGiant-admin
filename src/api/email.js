@@ -1,17 +1,17 @@
 import request from '@/router/axios';
 import {
-   myUrl
+   baseUrl
 } from '@/config/env';
 
 // 
 export const addEmailConfig = (page) => request({
-    url: myUrl + '/email/addEmailConfig',
+    url: baseUrl + '/email/addEmailConfig',
     method: 'post',
     data: page
 });
 
 export const getEmailConfigs = (page) => request({
-    url: myUrl + '/email/getEmailConfigs',
+    url: baseUrl + '/email/getEmailConfigs',
     method: 'post',
     data: page
 });

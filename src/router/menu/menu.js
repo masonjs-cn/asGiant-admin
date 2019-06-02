@@ -152,8 +152,7 @@ export const authMenu = [{
 },
 {
   label: "swagger-文档",
-  path: 'http://localhost:7001/swagger/index.html',
+  path: `http://${location.hostname}:7001/swagger/index.html`,
   icon: 'icon-wendang',
   children: [],
-}]
-;
+}];

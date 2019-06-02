@@ -2,16 +2,15 @@ import request from '@/router/axios';
 import { getImgToken } from '@/util/auth'
 import {
     baseUrl,
-    myUrl
 } from '@/config/env';
 
 export const code = () => request({
-    url: myUrl + '/user/code',
+    url: baseUrl + '/user/code',
     method: 'get'
 })
 
 export const signinUser = (page) => request({
-    url: myUrl + '/user/signinUser',
+    url: baseUrl + '/user/signinUser',
     method: 'post',
     data:page,
     headers: {
@@ -21,7 +20,7 @@ export const signinUser = (page) => request({
 })
 
 export const getUserList = (page) => request({
-    url: myUrl + '/user/getUserList',
+    url: baseUrl + '/user/getUserList',
     method: 'post',
     data: page
 })
