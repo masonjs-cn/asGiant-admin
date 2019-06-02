@@ -1,7 +1,7 @@
 <template>
     <section>
       <el-card class="box-card">
-      <h3>栏目管理</h3>
+      <h3>数据库管理</h3>
       <avue-crud :option="option"
                    :data="data"
                    :page="page"
@@ -14,7 +14,8 @@
                    @search-change="searchChange" >
 
           <template slot-scope="scope" slot="menu">
-            <el-button :size="scope.size" :type="scope.type">查看字段</el-button>
+            <el-button :size="scope.size" :type="scope.type" 
+            @click="$router.push({path:'/field/index',query:{userId:scope.row.columnid,columnName:scope.row.columnName}})">查看字段</el-button>
           </template>
         </avue-crud>
       </el-card>

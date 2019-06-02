@@ -53,6 +53,7 @@ class ColumnController extends Controller {
     // 验证不通过时，阻止后面的代码执行
     if (!validateResult) return;
 
+    ctx.params.columnid = tool.generateUUID();
     ctx.body = await this.service.column.addColumn(ctx.params);
 
   }

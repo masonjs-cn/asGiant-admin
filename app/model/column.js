@@ -20,6 +20,10 @@ module.exports = app => {
       type: String,
       require: true,
     },
+    columnid: {
+      type: String,
+      require: true,
+    },
   });
   return mongoose.model('Column', ColumnSchema, 'column');
 };

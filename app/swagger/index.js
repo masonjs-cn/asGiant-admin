@@ -36,34 +36,34 @@ const swaggerConfig = {
         url: 'http://editor.swagger.io/',
       },
     },
-    tags: [{
-      name: 'column',
-      description: '栏目管理模块',
-    },
-    {
-      name: 'user',
-      description: '用户管理',
-    },
-    {
-      name: 'role',
-      description: '角色管理',
-    },
-    {
-      name: 'email',
-      description: '邮箱管理模块',
-    },
-    {
-      name: 'home',
-      description: '页面展示',
-    },
-    {
-      name: 'upload',
-      description: '上传模块',
-    },
-    {
-      name: 'template',
-      description: '模板管理',
-    }],
+    tags: [
+      {
+        name: 'user',
+        description: '用户管理',
+      }, {
+        name: 'column',
+        description: '栏目管理模块',
+      },
+      {
+        name: 'role',
+        description: '角色管理',
+      },
+      {
+        name: 'email',
+        description: '邮箱管理模块',
+      },
+      {
+        name: 'home',
+        description: '页面展示',
+      },
+      {
+        name: 'upload',
+        description: '上传模块',
+      },
+      {
+        name: 'template',
+        description: '模板管理',
+      }],
     definitions: {
       // model definitions
     },

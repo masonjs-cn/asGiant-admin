@@ -22,12 +22,21 @@ export const userOption = {
         {
             label: '数据库名称',
             prop: 'columnName',
+            labelWidth: 100,
             span: 24,
         }, {
             label: '备注',
             prop: 'note',
             type: 'textarea',
             span: 24,
+        },
+        {
+            label: "数据库id",
+            prop: 'columnid',
+            width: 320,
+            span: 24,
+            editDisplay: false,
+            addDisplay:false
         }
     ]
 }

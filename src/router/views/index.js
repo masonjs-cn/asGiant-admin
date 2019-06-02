@@ -53,7 +53,6 @@ export default [{
 }, {
     path: '/field',
     component: Layout,
-    redirect: '/info/index',
     children: [{
         path: 'index',
         name: '字段管理',

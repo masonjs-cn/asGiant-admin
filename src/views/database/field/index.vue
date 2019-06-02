@@ -1,191 +1,265 @@
 <template>
-    <section>
-      <el-card class="box-card">
-        <avue-crud :option="option"
-                   :data="data"
-                   :page="page"
-                   @on-load="onLoad"
-                   @row-save="handleSave"
-                   @row-del="handleDel"
-                   @row-update="handleUpdate"
-                   :table-loading="tableLoading"
-                   @refresh-change="refreshChange"
-                   @search-change="searchChange" >
-          <template slot="icon" slot-scope="scope">
-            <i :class="scope.row.icon" style="font-size:24px"></i>
-          </template>
-          <template slot="menu" slot-scope="scope">
-            <el-button :size="scope.size" :type="scope.type" v-if="scope.row.children">添加栏目</el-button>
-          </template>
-        </avue-crud>
-      </el-card>
-    </section>  
+ <el-card class="box-card">
+  <h3>{{info.columnName}}表-字段管理</h3>
+  <el-container class="home">
+    <el-aside style="wdith: 250px;">
+      <div class="components-list">
+        <div class="widget-cate">基础字段</div>
+        <draggable element="ul"
+                   @end="handleEnd"
+                   v-model="basicComponents"
+                   :options="{group:{ name:'avue', pull:'clone',put:false},sort:false, ghostClass: 'avue-ghost'}">
+
+          <li class="form-edit-widget-label"
+              v-for="(item, index) in basicComponents"
+              :key="index">
+            <a>
+              <span>{{item.label}}</span>
+            </a>
+          </li>
+        </draggable>
+
+        <div class="widget-cate">高级字段</div>
+        <draggable element="ul"
+                   v-model="advanceComponents"
+                   @end="handleEnd"
+                   :options="{group:{ name:'avue', pull:'clone',put:false},sort:false, ghostClass: 'avue-ghost'}">
+
+          <li class="form-edit-widget-label"
+              v-for="(item, index) in advanceComponents"
+              :key="index">
+            <a>
+              <span>{{item.label}}</span>
+            </a>
+          </li>
+        </draggable>
+
+      </div>
+
+    </el-aside>
+    <el-container class="center-container"
+                  direction="vertical">
+      <el-header class="btn-bar"
+                 style="height: 45px;">
+
+        <el-button type="text"
+                   size="mini"
+                   @click="handleExportJson">导入</el-button>
+        <el-button type="text"
+                   size="mini"
+                   @click="handleGenerateJson">生成</el-button>
+        <el-button type="text"
+                   size="mini"
+                   @click="handleClearForm">清空</el-button>
+      </el-header>
+      <el-main>
+        <draggable class="main"
+                   v-model="columnResult"
+                   :options="{animation: 0,ghostClass: 'avue-ghost',group: {put: ['avue'],}}">
+          <avue-form :option="resultForm"
+                     v-model="form"
+                     class="main"> </avue-form>
+        </draggable>
+      </el-main>
+    </el-container>
+
+    <el-aside class="widget-config-container">
+      <el-radio-group v-model="configTab"
+                      size=mini
+                      >
+        <el-radio-button label="ceng">字段图层</el-radio-button>
+        <el-radio-button label="widget">字段属性</el-radio-button>
+        <el-radio-button label="form">表单属性</el-radio-button>
+      </el-radio-group>
+      <div class="config-content">
+        <ceng-config v-show="configTab==='ceng'"
+                     v-model="resultForm.column"
+                     @item-click="itemClick"></ceng-config>
+        <widget-config v-show="configTab==='widget'"
+                       v-model="columnObj"></widget-config>
+        <form-config v-show="configTab==='form'"
+                     v-model="resultForm"></form-config>
+      </div>
+
+    </el-aside>
+
+    <cus-dialog :visible="previewVisible"
+                @on-close="previewVisible = false"
+                @on-submit="handleExport"
+                ref="widgetPreview"
+                width="1000px">
+
+      <div id="preview"
+           style="height: 400px;">
+      </div>
+
+    </cus-dialog>
+
+    <cus-dialog :visible="jsonVisible"
+                @on-close="jsonVisible = false"
+                ref="jsonPreview"
+                width="800px"
+                form>
+      <div id="jsoneditor"
+           style="height: 400px;">
+      </div>
+
+    </cus-dialog>
+  </el-container>
+ </el-card>
 </template>
 
 <script>
-import * as column from '@/api/column'
-import { userOption } from "./option.js";
-import * as tool from '@/util/tool'
+import Draggable from "vuedraggable";
+import FormConfig from "@/components/editor/FormConfig";
+import WidgetConfig from "@/components/editor/WidgetConfig";
+import CengConfig from "@/components/editor/CengConfig";
+import CusDialog from "@/components/editor/CusDialog";
+import {
+  basicComponents,
+  layoutComponents,
+  advanceComponents
+} from "@/config/componentsConfig.js";
+import { loadJs, loadCss } from "@/util/editor.js";
 
-  export default {
-    data(){
-      return {
-          data: [
-            {
-              id: 0,
-              event: '事件1',
-              timeLine: 50,
-              icon: 'el-icon-time',
-              comment: '无'
-            },
-            {
-              id: 1,
-              event: '事件1',
-              icon: 'el-icon-bell',
-              timeLine: 100,
-              comment: '无',
-              children: [
-                {
-                  id: 2,
-                  event: '事件2',
-                  icon: 'el-icon-star-on',
-                  timeLine: 10,
-                  comment: '无'
-                },
-                {
-                  id: 3,
-                  event: '事件3',
-                  timeLine: 90,
-                  comment: '无',
-                }
-              ]
-            }
-          ],
-          tableLoading: false,
-          page: {
-            pageSizes: [10, 20, 30, 40],
-            total: 20,
-            currentPage: 1,
-            pageSize: 10
-          },
-          option: userOption,
-          searchForm:{}
-      }
+export default {
+  name: "home",
+  components: {
+    Draggable,
+    WidgetConfig,
+    CengConfig,
+    CusDialog,
+    FormConfig
+  },
+  data() {
+    return {
+      basicComponents,
+      layoutComponents,
+      advanceComponents,
+      exportForm: "",
+      resultForm: {
+        labelWidth: 110,
+        submitPosition: "center",
+        submitText: "提交",
+        labelPosition: "right",
+        column: []
+      },
+      columnResult: [],
+      columnObj: {},
+      columnIndex: -1,
+      form: {},
+      configTab: "ceng",
+      previewVisible: false,
+      jsonVisible: false,
+      info:{}
+    };
+  },
+  watch: {
+    columnObj: {
+      handler() {
+        this.$set(this.resultForm.column, this.columnIndex, this.columnObj);
+      },
+      deep: true
     },
-    methods: {
-      onLoad(page) {
-        this.page = page
-        this.searchForm = page;
-        this.loadColumnList()
+    resultForm: {
+      handler() {
+        this.$store.commit("set_data", this.resultForm);
       },
-      loadColumnList () {
-        this.data = []
-        this.tableLoading = true
-        this.searchForm.currentPage= this.page.currentPage
-        this.searchForm.pageSize=this.page.pageSize
-        
-        column.getColumnList(this.searchForm)
-          .then(res => { 
-            tool.fanhui(res)
-            .then(data=>{
-              this.data = data.list
-              this.page.total = data.total
-            })
-            this.tableLoading = false
-        });
-      },
-      searchChange(params){
-        this.loadColumnList()
-      },
-      sizeChange (val) {
-        this.page.pageSize = val
-        this.loadColumnList()
-        // this.$message.success("行数" + val);
-      },
-      currentChange (val) {
-        this.page.currentPage = val
-        this.loadColumnList()
-        this.$message.success('页码' + val)
-      },
-      /**
-       * @title 打开新增窗口
-       * @detail 调用crud的handleadd方法即可
-       *
-       **/
-      handleAdd () {
-        this.$refs.crud.rowAdd()
-      },
-      /**
-       * @title 数据添加
-       * @param row 为当前的数据
-       * @param done 为表单关闭函数
-       *
-       **/
-      handleSave (row, done) {
-        column.addColumn(row)
-          .then(res => { 
-            tool.fanhui(res)
-            .then(data=>{
-              this.refreshChange();
-            })
-        });
-        done()
-      },
-      /**
-       * @title 数据删除
-       * @param row 为当前的数据
-       * @param index 为当前更新数据的行数
-       *
-       **/
-      handleDel (row, index) {
-        this.$confirm(`是否确认删除序号为${row.name}`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-          .then(() => {
-            this.tableData.splice(index, 1)
-            this.$message({
-              showClose: true,
-              message: '删除成功',
-              type: 'success'
-            })
-          })
-          // .catch(err => {})
-      },
-      /**
-       * @title 数据更新
-       * @param row 为当前的数据
-       * @param index 为当前更新数据的行数
-       * @param done 为表单关闭函数
-       *
-       **/
-      handleUpdate (row, index, done) {
-        console.log('====================================')
-        console.log(row)
-        console.log('====================================')
-        // this.tableData.splice(index, 1, row);
-        this.$message({
-          showClose: true,
-          message: '修改成功',
-          type: 'success'
-        })
-        done()
-      },
-      /**
-       * @title 刷新数据
-       *
-       **/
-
-      refreshChange () {
-        this.searchForm = {}
-        this.loadColumnList()
+      deep: true
+    }
+  },
+  created () {
+    this.info=this.$route.query
+  },
+  mounted() {
+    loadCss("https://unpkg.com/jsoneditor/dist/jsoneditor.min.css");
+    loadJs("https://unpkg.com/jsoneditor/dist/jsoneditor.min.js");
+    const data = this.$store.state.data;
+    if (data) {
+      this.resultForm = data;
+    }
+  },
+  methods: {
+    handleClearForm() {
+      this.resultForm = {
+        column: []
+      };
+      this.$message.success("清空成功");
+    },
+    handleExportJson() {
+      this.previewVisible = true;
+      this.$nextTick(() => {
+        this.exportForm = new window.JSONEditor(
+          document.getElementById("preview"),
+          {
+            mode: "code"
+          }
+        );
+      });
+    },
+    handleExport() {
+      try {
+        JSON.stringify(this.exportForm.get());
+      } catch (e) {
+        this.$message.error("导入数据错误");
+        return;
       }
+      this.resultForm = this.exportForm.get();
+      this.$message.success("导入成功");
+      this.previewVisible = false;
+    },
+    handleEnd(evt) {
+      if (evt.to.className !== "main") return;
+      let obj = this.deepClone(this.columnResult[0]);
+      obj.prop = obj.prop + new Date().getTime();
+      this.resultForm.column.push(obj);
+    },
+    itemClick(item, index) {
+      this.columnObj = this.resultForm.column[index];
+      this.columnIndex = index;
+      this.configTab = "widget";
+    },
+    handleGenerateJson() {
+      this.jsonVisible = true;
+      this.$nextTick(() => {
+        const editor = new window.JSONEditor(
+          document.getElementById("jsoneditor"),
+          {
+            mode: "code"
+          }
+        );
+        let result = { ...this.resultForm };
+        editor.set(result);
+      });
     }
   }
+};
 </script>
 
-<style scoped>
-
- 
+<style lang="scss">
+@import "@/styles/editor/cover.scss";
+@import "@/styles/editor/index.scss";
+body,
+html {
+  height: 100%;
+}
+.home {
+  height: 100%;
+  overflow: hidden;
+}
+.main {
+  .el-row {
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+}
+.avue-form__option {
+  top: 0 !important;
+}
+.components-list {
+  user-select: none;
+}
+.config-content {
+  margin-top: 20px;
+}
 </style>
