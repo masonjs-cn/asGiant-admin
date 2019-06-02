@@ -149,5 +149,11 @@ export const authMenu = [{
     icon: 'icon-icon--',
     children: [],
   }],
+},
+{
+  label: "swagger-文档",
+  path: 'http://127.0.0.1:7001/swagger/index.html',
+  icon: 'icon-baidu1',
+  children: [],
 }]
 ;

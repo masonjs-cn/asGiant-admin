@@ -14,7 +14,7 @@ if (env.NODE_ENV == 'development') {
 } else if (env.NODE_ENV == 'test') {
     baseUrl = ``; //测试环境地址
 }
-/* eslint-disable */
+
 export {
     myUrl,
     baseUrl,
