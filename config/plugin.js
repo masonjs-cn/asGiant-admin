@@ -40,5 +40,5 @@ exports.cors = {
 
 exports.swagger2 = {
   enable: true,
-  package: 'egg-swagger2',
+  package: 'egg-swagger3',
 };

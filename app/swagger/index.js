@@ -9,6 +9,7 @@ const upload = require('./modules/upload.js');
 
 const swaggerConfig = {
   enable: true, // 禁用swagger , 默认为true
+  path: 2,
   base: {
     /* default config,support cover
       schemes: [
