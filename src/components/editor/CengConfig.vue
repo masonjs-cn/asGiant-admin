@@ -7,7 +7,7 @@
            v-for="(item,index) in list"
            @click="handleClick(item,index)"
            :key="index">
-        <span class="title">{{item.label}}</span>
+        <span class="title">{{item.label}}({{item.prop}})</span>
         <span class="close"
               @click.stop="handleDel(index)">x</span>
       </div>
@@ -81,7 +81,7 @@ export default {
   }
   .title {
     padding: 2px 20px;
-    font-size: 14px;
+    font-size: 10px;
   }
   .close {
     position: absolute;

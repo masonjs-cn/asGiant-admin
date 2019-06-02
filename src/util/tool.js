@@ -158,3 +158,15 @@ export const fanhui = res => {
         resolve(res.data)
     });
 }
+
+export const isRepeat=(arr)=> {
+    debugger
+    let hash = {};
+    for (let i in arr) {
+        if (hash[arr[i]]) {
+            return true;
+        }
+        hash[arr[i]] = true;
+    }
+    return false;
+}

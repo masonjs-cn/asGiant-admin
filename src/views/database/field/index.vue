@@ -2,6 +2,7 @@
  <el-card class="box-card">
   <h3>{{info.columnName}}表-字段管理</h3>
   <el-container class="home">
+
     <el-aside style="wdith: 250px;">
       <div class="components-list">
         <div class="widget-cate">基础字段</div>
@@ -37,6 +38,8 @@
       </div>
 
     </el-aside>
+
+    <!-- 导出、导入、生成 -->
     <el-container class="center-container"
                   direction="vertical">
       <el-header class="btn-bar"
@@ -58,19 +61,22 @@
                    :options="{animation: 0,ghostClass: 'avue-ghost',group: {put: ['avue'],}}">
           <avue-form :option="resultForm"
                      v-model="form"
+                     @submit="submitField"
                      class="main"> </avue-form>
         </draggable>
       </el-main>
     </el-container>
 
+    <!-- 属性管理 -->
     <el-aside class="widget-config-container">
+      
       <el-radio-group v-model="configTab"
-                      size=mini
-                      >
+                      size=mini>
         <el-radio-button label="ceng">字段图层</el-radio-button>
         <el-radio-button label="widget">字段属性</el-radio-button>
         <el-radio-button label="form">表单属性</el-radio-button>
       </el-radio-group>
+
       <div class="config-content">
         <ceng-config v-show="configTab==='ceng'"
                      v-model="resultForm.column"
@@ -88,7 +94,6 @@
                 @on-submit="handleExport"
                 ref="widgetPreview"
                 width="1000px">
-
       <div id="preview"
            style="height: 400px;">
       </div>
@@ -99,12 +104,14 @@
                 @on-close="jsonVisible = false"
                 ref="jsonPreview"
                 width="800px"
+                @on-submit="handSubmit"
                 form>
       <div id="jsoneditor"
            style="height: 400px;">
       </div>
 
     </cus-dialog>
+    
   </el-container>
  </el-card>
 </template>
@@ -121,7 +128,7 @@ import {
   advanceComponents
 } from "@/config/componentsConfig.js";
 import { loadJs, loadCss } from "@/util/editor.js";
-
+import * as tool from '@/util/tool'
 export default {
   name: "home",
   components: {
@@ -172,8 +179,6 @@ export default {
     this.info=this.$route.query
   },
   mounted() {
-    loadCss("https://unpkg.com/jsoneditor/dist/jsoneditor.min.css");
-    loadJs("https://unpkg.com/jsoneditor/dist/jsoneditor.min.js");
     const data = this.$store.state.data;
     if (data) {
       this.resultForm = data;
@@ -196,6 +201,23 @@ export default {
           }
         );
       });
+    },
+    handSubmit(m){
+      this.jsonVisible = false
+      let a = []
+      let arrayValue = []
+      this.resultForm.column.forEach(element => {
+        a.push(element);
+        arrayValue.push(element.prop)
+      });
+
+      if (tool.isRepeat(arrayValue)) {
+        this.$message.error("字段不允许有重复");
+        return
+      }
+
+    },
+    submitField(){
     },
     handleExport() {
       try {
