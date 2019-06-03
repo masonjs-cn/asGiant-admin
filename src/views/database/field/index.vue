@@ -7,11 +7,28 @@
   <el-checkbox v-model="resultForm.delBtn">删除按钮</el-checkbox>
   <el-checkbox v-model="resultForm.columnBtn">列显隐按钮</el-checkbox>
   <el-checkbox v-model="resultForm.filterBtn">过滤按钮</el-checkbox>
+  <el-checkbox v-model="resultForm.border">表格边框</el-checkbox>
 
   <el-container class="home">
     <el-aside style="wdith: 250px;">
       <div class="components-list">
-        <div class="widget-cate">基础字段</div>
+        
+        <div class="widget-cate">输入框字段</div>
+        <draggable element="ul"
+                   @end="handleEnd"
+                   v-model="inputComponents"
+                   :options="{group:{ name:'avue', pull:'clone',put:false},sort:false, ghostClass: 'avue-ghost'}">
+
+          <li class="form-edit-widget-label"
+              v-for="(item, index) in inputComponents"
+              :key="index">
+            <a>
+              <span>{{item.label}}</span>
+            </a>
+          </li>
+        </draggable>
+
+        <div class="widget-cate">选择字段</div>
         <draggable element="ul"
                    @end="handleEnd"
                    v-model="basicComponents"
@@ -19,6 +36,20 @@
 
           <li class="form-edit-widget-label"
               v-for="(item, index) in basicComponents"
+              :key="index">
+            <a>
+              <span>{{item.label}}</span>
+            </a>
+          </li>
+        </draggable>
+
+        <div class="widget-cate">时间字段</div>
+        <draggable element="ul"
+                   @end="handleEnd"
+                   v-model="timeComponents"
+                   :options="{group:{ name:'avue', pull:'clone',put:false},sort:false, ghostClass: 'avue-ghost'}">
+          <li class="form-edit-widget-label"
+              v-for="(item, index) in timeComponents"
               :key="index">
             <a>
               <span>{{item.label}}</span>
@@ -60,15 +91,30 @@
         <el-button type="text"
                    size="mini"
                    @click="handleClearForm">清空</el-button>
+        <el-switch
+          class="avue-switch"
+          size="mini"
+          v-model="formTocrud"
+          active-text="表单"
+          inactive-text="表格">
+        </el-switch>
       </el-header>
+
       <el-main>
         <draggable class="main"
                    v-model="columnResult"
                    :options="{animation: 0,ghostClass: 'avue-ghost',group: {put: ['avue'],}}">
+
           <avue-form :option="resultForm"
                      v-model="form"
-                     @submit="submitField"
-                     class="main"> </avue-form>
+                     v-if="!formTocrud"
+                     class="main-list"> </avue-form>
+
+          <avue-crud :option="resultForm"
+                     :data=[]
+                     v-if="formTocrud"
+                     class="main-list"> </avue-crud>
+
         </draggable>
       </el-main>
     </el-container>
@@ -131,7 +177,9 @@ import CusDialog from "@/components/editor/CusDialog";
 import {
   basicComponents,
   layoutComponents,
-  advanceComponents
+  advanceComponents,
+  timeComponents,
+  inputComponents
 } from "@/config/componentsConfig.js";
 import { loadJs, loadCss } from "@/util/editor.js";
 import * as tool from '@/util/tool'
@@ -149,13 +197,23 @@ export default {
       basicComponents,
       layoutComponents,
       advanceComponents,
+      timeComponents,
+      inputComponents,
       exportForm: "",
       resultForm: {
         labelWidth: 110,
         submitPosition: "center",
         submitText: "提交",
         labelPosition: "right",
-        column: []
+        submitBtn:false,
+        emptyBtn:false,
+        column: [],
+        addBtn:true,
+        editBtn:true,
+        delBtn:true,
+        columnBtn:true,
+        filterBtn:true,
+        border:true
       },
       columnResult: [],
       columnObj: {},
@@ -164,7 +222,8 @@ export default {
       configTab: "ceng",
       previewVisible: false,
       jsonVisible: false,
-      info:{}
+      info:{},
+      formTocrud:false
     };
   },
   watch: {
@@ -239,7 +298,7 @@ export default {
     handleEnd(evt) {
       if (evt.to.className !== "main") return;
       let obj = this.deepClone(this.columnResult[0]);
-      obj.prop = obj.prop + new Date().getTime();
+      obj.prop = obj.prop;
       this.resultForm.column.push(obj);
     },
     itemClick(item, index) {
@@ -282,6 +341,10 @@ html {
     overflow-y: scroll;
   }
 }
+.main-list{
+  margin-top: 20px;
+  width: 80%;
+}
 .avue-form__option {
   top: 0 !important;
 }
@@ -290,5 +353,9 @@ html {
 }
 .config-content {
   margin-top: 20px;
+}
+.avue-switch{
+  float: left;
+  margin-top: 12px;
 }
 </style>
