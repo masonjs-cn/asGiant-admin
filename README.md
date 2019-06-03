@@ -3,15 +3,23 @@
 </p>
 
 <p align="center">
+
+  <a href="https://github.com/eggjs">
+    <img src="https://img.shields.io/badge/egg-2.22.2-blue.svg" alt="vue">
+  </a>
+
   <a href="https://github.com/vuejs/vue">
-    <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue">
+    <img src="https://img.shields.io/badge/vue-2.5.16-yellowgreen.svg" alt="vue">
   </a>
+
   <a href="https://github.com/ElemeFE/element">
-    <img src="https://img.shields.io/badge/element--ui-2.7.0-brightgreen.svg" alt="element-ui">
+    <img src="https://img.shields.io/badge/element--ui-2.9.1-brightgreen.svg" alt="element-ui">
   </a>
-  <a href="https://travis-ci.org/PanJiaChen/vue-element-admin" rel="nofollow">
-    <img src="https://travis-ci.org/PanJiaChen/vue-element-admin.svg?branch=master" alt="Build Status">
+
+  <a href="https://avue.top" rel="nofollow">
+    <img src=https://img.shields.io/badge/avuex-2.0-red.svg?branch=master" alt="avuex">
   </a>
+  
 </p>
 
 ### 介绍
