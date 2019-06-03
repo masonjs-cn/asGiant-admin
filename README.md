@@ -1,5 +1,5 @@
 <p align="center">
-  <img width = "320" align=center src="https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/logo.svg">
+  <img width = "320" align=center src="https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/logo.png">
 </p>
 
 <p align="center">
