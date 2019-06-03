@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/logo.svg">
+  <img style="width: 50%;margin-left: -14%;" src="https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/logo.svg">
 </p>
-
-asGiant-admin is an architecture that does not require a backend。
 
 ### 介绍
 > 基于egg架构的自动生成接口的框架
