@@ -211,6 +211,7 @@ export default {
         addBtn:true,
         editBtn:true,
         delBtn:true,
+        menu: true,
         columnBtn:true,
         filterBtn:true,
         border:true
@@ -235,6 +236,7 @@ export default {
     },
     resultForm: {
       handler() {
+        this.resultForm.menu=[this.resultForm.addBtn,this.resultForm.editBtn,this.resultForm.delBtn,].some(res =>{return res})
         this.$store.commit("set_data", this.resultForm);
       },
       deep: true
