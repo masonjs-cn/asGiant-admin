@@ -26,8 +26,7 @@ asGiant-admin is an architecture that does not require a backend。
 - swagger 文档
 
 ### 流程图
-
-![流程图](https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/asGiant.jpg?raw=true)
+<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/flow-chart.md"><strong>流程图</strong></a>
 
 ### 页面展示
 
