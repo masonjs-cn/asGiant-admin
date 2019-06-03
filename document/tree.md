@@ -61,6 +61,16 @@
 ├── jsconfig.json
 ├── logs
 │   └── asGiant-admin
+│       ├── asGiant-admin-web.log
+│       ├── asGiant-admin-web.log.2019-06-02
+│       ├── common-error.log
+│       ├── common-error.log.2019-06-02
+│       ├── egg-agent.log
+│       ├── egg-agent.log.2019-06-02
+│       ├── egg-schedule.log
+│       ├── egg-schedule.log.2019-06-02
+│       ├── egg-web.log
+│       └── egg-web.log.2019-06-02
 ├── package-lock.json
 ├── package.json
 ├── public
@@ -184,6 +194,7 @@
 ├── test
 │   └── app
 │       └── controller
+├── tree.md
 ├── typings
 │   ├── app
 │   │   ├── controller
@@ -196,3 +207,5 @@
 │       └── plugin.d.ts
 ├── vue.config.js
 └── yarn.lock
+
+93 directories, 115 files
