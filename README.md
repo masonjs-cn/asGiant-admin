@@ -11,11 +11,21 @@ asGiant-admin is an architecture that does not require a backend。
 <a href="http://admin.shanghai70.com" target="_blank"><strong>预览网址</strong></a>
 
 ### 功能
+
 - 增删改查数据库
-- 自由添加字段
+- 自由添加字段(自动生成页面)
+- 菜单管理
+  - 
 - 登录
 - 权限
 - 数据采集
+- 邮箱
+- 短信
+- 文件管理
+
+### 页面展示
+
+![页面展示](/MYQ1996/asGiant-admin/blob/master/document/img/WX20190603-215825@2x.png?raw=true)
 
 ### 技术栈
 - egg
