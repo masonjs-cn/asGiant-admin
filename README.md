@@ -1,5 +1,17 @@
 <p align="center">
-  <img style="width: 50%;margin-left: -14%;" src="https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/logo.svg">
+  <img width = "320" align=center src="https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/logo.svg">
+</p>
+
+<p align="center">
+  <a href="https://github.com/vuejs/vue">
+    <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue">
+  </a>
+  <a href="https://github.com/ElemeFE/element">
+    <img src="https://img.shields.io/badge/element--ui-2.7.0-brightgreen.svg" alt="element-ui">
+  </a>
+  <a href="https://travis-ci.org/PanJiaChen/vue-element-admin" rel="nofollow">
+    <img src="https://travis-ci.org/PanJiaChen/vue-element-admin.svg?branch=master" alt="Build Status">
+  </a>
 </p>
 
 ### 介绍
