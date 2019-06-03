@@ -50,6 +50,6 @@ https://github.com/MYQ1996/asGiant-admin.git
 
 <a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/redis.md"><strong>redis安装</strong></a>
 
-<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/tree.md"><strong>路径说明</strong></a>
+<a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/directory.md"><strong>路径说明</strong></a>
 
 <a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/installation.md"><strong>模块分析</strong></a>
