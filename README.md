@@ -15,13 +15,15 @@ asGiant-admin is an architecture that does not require a backend。
 - 增删改查数据库
 - 自由添加字段(自动生成页面)
 - 菜单管理
-  - 
+  - 动态添加路由
+  - 选择数据库栏目(万能页面)
 - 登录
 - 权限
 - 数据采集
 - 邮箱
 - 短信
 - 文件管理
+- swagger 文档
 
 ### 页面展示
 
