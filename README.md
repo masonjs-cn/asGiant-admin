@@ -25,6 +25,10 @@ asGiant-admin is an architecture that does not require a backend。
 - 文件管理
 - swagger 文档
 
+### 流程图
+
+![流程图](https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/asGiant.jpg?raw=true)
+
 ### 页面展示
 
 ![页面展示](https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/WX20190603-215825@2x.png?raw=true)
@@ -35,7 +39,7 @@ asGiant-admin is an architecture that does not require a backend。
 - redis
 - avuex
 
-### 数据接口:
+### 接口文档:
 > swagger接口 见使用指南
 
 ### 源码地址：

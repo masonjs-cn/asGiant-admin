@@ -2,9 +2,9 @@
  <el-card class="box-card">
   <h3>{{info.columnName}}表-字段管理</h3>
 
-  <el-checkbox v-model="resultForm.addBtn">增加按钮</el-checkbox>
+  <!-- <el-checkbox v-model="resultForm.addBtn">增加按钮</el-checkbox>
   <el-checkbox v-model="resultForm.editBtn">编辑按钮</el-checkbox>
-  <el-checkbox v-model="resultForm.delBtn">删除按钮</el-checkbox>
+  <el-checkbox v-model="resultForm.delBtn">删除按钮</el-checkbox> -->
   <el-checkbox v-model="resultForm.columnBtn">列显隐按钮</el-checkbox>
   <el-checkbox v-model="resultForm.filterBtn">过滤按钮</el-checkbox>
   <el-checkbox v-model="resultForm.border">表格边框</el-checkbox>
@@ -208,9 +208,6 @@ export default {
         submitBtn:false,
         emptyBtn:false,
         column: [],
-        addBtn:true,
-        editBtn:true,
-        delBtn:true,
         menu: true,
         columnBtn:true,
         filterBtn:true,
@@ -236,7 +233,7 @@ export default {
     },
     resultForm: {
       handler() {
-        this.resultForm.menu=[this.resultForm.addBtn,this.resultForm.editBtn,this.resultForm.delBtn,].some(res =>{return res})
+        // this.resultForm.menu=[this.resultForm.addBtn,this.resultForm.editBtn,this.resultForm.delBtn,].some(res =>{return res})
         this.$store.commit("set_data", this.resultForm);
       },
       deep: true
