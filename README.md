@@ -5,11 +5,11 @@
 <p align="center">
 
   <a href="https://github.com/eggjs">
-    <img src="https://img.shields.io/badge/egg-2.22.2-blue.svg" alt="vue">
+    <img src="https://img.shields.io/badge/egg-2.22.2-brightgreen.svg" alt="vue">
   </a>
 
   <a href="https://github.com/vuejs/vue">
-    <img src="https://img.shields.io/badge/vue-2.5.16-yellowgreen.svg" alt="vue">
+    <img src="https://img.shields.io/badge/vue-2.5.16-brightgreen.svg" alt="vue">
   </a>
 
   <a href="https://github.com/ElemeFE/element">
