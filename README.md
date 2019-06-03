@@ -25,7 +25,7 @@ asGiant-admin is an architecture that does not require a backend。
 
 ### 页面展示
 
-![页面展示](/MYQ1996/asGiant-admin/blob/master/document/img/WX20190603-215825@2x.png?raw=true)
+![页面展示](https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/WX20190603-215825@2x.png?raw=true)
 
 ### 技术栈
 - egg
