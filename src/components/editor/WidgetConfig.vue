@@ -51,7 +51,7 @@
         <el-form-item label="格栅" size="mini">
           <el-input v-model.number="data.span"></el-input>
         </el-form-item>
-        <el-form-item label="是否单独一行" size="mini">
+        <!-- <el-form-item label="是否单独一行" size="mini">
           <el-switch v-model="data.row"
                      :active-value="true"
                      :inactive-value="false"></el-switch>
@@ -73,11 +73,11 @@
                            :min="0"
                            :max="100"
                            :step="1"></el-input-number>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="操作属性">
-          <el-checkbox v-model="data.readonly">只读</el-checkbox>
-          <el-checkbox v-model="data.disabled">禁用 </el-checkbox>
-          <el-checkbox v-model="data.clearable">清除按钮</el-checkbox>
+          <el-checkbox v-model="data.disabled">禁用</el-checkbox>
+          <el-checkbox v-model="data.addDisplay">删除可见</el-checkbox>
+          <el-checkbox v-model="data.editDisplay">编辑可见</el-checkbox>
         </el-form-item>
         <el-form-item label="步长"
                       v-if="['number'].includes(data.type)">

@@ -1,8 +1,14 @@
 <template>
  <el-card class="box-card">
   <h3>{{info.columnName}}表-字段管理</h3>
-  <el-container class="home">
 
+  <el-checkbox v-model="resultForm.addBtn">增加按钮</el-checkbox>
+  <el-checkbox v-model="resultForm.editBtn">编辑按钮</el-checkbox>
+  <el-checkbox v-model="resultForm.delBtn">删除按钮</el-checkbox>
+  <el-checkbox v-model="resultForm.columnBtn">列显隐按钮</el-checkbox>
+  <el-checkbox v-model="resultForm.filterBtn">过滤按钮</el-checkbox>
+
+  <el-container class="home">
     <el-aside style="wdith: 250px;">
       <div class="components-list">
         <div class="widget-cate">基础字段</div>
@@ -267,6 +273,7 @@ html {
 }
 .home {
   height: 100%;
+  margin-top: 15px;
   overflow: hidden;
 }
 .main {
