@@ -20,12 +20,12 @@
     <img src=https://img.shields.io/badge/avuex-2.0-red.svg?branch=master" alt="avuex">
   </a>
 
-  <a href="https://www.mongodb.com/" rel="nofollow">
-    <img src=https://img.shields.io/badge/mongdb-4.0.5-brightgreen.svg" alt="avuex">
+  <a href="https://www.redis.com/" rel="nofollow">
+    <img src=https://img.shields.io/badge/mongdb-4.0.5-brightgreen.svg" alt="redis">
   </a>
 
   <a href="https://redis.io/" rel="nofollow">
-    <img src=https://img.shields.io/badge/redis-5.0-red.svg" alt="avuex">
+    <img src=https://img.shields.io/badge/redis-5.0-red.svg" alt="redis">
   </a>
 
 </p>
