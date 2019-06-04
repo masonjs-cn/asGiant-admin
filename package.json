@@ -37,7 +37,6 @@
     "egg-scripts": "^2.11.0",
     "egg-swagger3": "^1.0.4",
     "egg-validate-plus": "^1.1.6",
-    "element-ui": "^2.8.2",
     "imap": "^0.8.19",
     "js-cookie": "^2.2.0",
     "mailparser": "^2.7.1",

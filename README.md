@@ -16,12 +16,18 @@
     <img src="https://img.shields.io/badge/vue-2.5.16-brightgreen.svg" alt="vue">
   </a>
 
-
-
   <a href="https://avue.top" rel="nofollow">
     <img src=https://img.shields.io/badge/avuex-2.0-red.svg?branch=master" alt="avuex">
   </a>
-  
+
+  <a href="https://www.mongodb.com/" rel="nofollow">
+    <img src=https://img.shields.io/badge/mongdb-4.0.5-brightgreen.svg" alt="avuex">
+  </a>
+
+  <a href="https://redis.io/" rel="nofollow">
+    <img src=https://img.shields.io/badge/redis-5.0-red.svg" alt="avuex">
+  </a>
+
 </p>
 
 ### 介绍
@@ -50,17 +56,13 @@
 - swagger 文档
 
 ### 流程图
+
 <a href="https://github.com/MYQ1996/asGiant-admin/blob/master/document/flow-chart.md"><strong>流程图</strong></a>
 
 ### 页面展示
 
 ![页面展示](https://github.com/MYQ1996/asGiant-admin/blob/master/document/img/WX20190603-215825@2x.png?raw=true)
 
-### 技术栈
-- egg
-- mongdb
-- redis
-- avuex
 
 ### 接口文档:
 > swagger接口 见使用指南
