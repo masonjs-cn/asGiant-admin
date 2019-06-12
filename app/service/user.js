@@ -26,6 +26,11 @@ class UserService extends Service {
     user.save();
   }
 
+  async addIp(a) {
+    const user = new this.ctx.model.User(a);
+    user.save();
+  }
+
   async updateUser() {
     const result = await this.ctx.model.User.updateOne({
       _id: '5c00f0ce862e9227acb56d22',
