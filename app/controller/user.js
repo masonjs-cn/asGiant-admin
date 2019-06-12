@@ -5,6 +5,14 @@ const tool = require('../utils/tool.js');
 const svgCaptcha = require('svg-captcha'); // 验证码图生成
 class UserController extends Controller {
 
+  async hhh() {
+    const { ctx } = this;
+    // tool.getIp(ctx);s
+    ctx.body = await this.service.user.addIp({
+      last_login_ip: tool.getIp(ctx),
+    });
+  }
+
   // 图片验证码
   async code() {
 

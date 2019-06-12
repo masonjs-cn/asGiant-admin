@@ -56,6 +56,55 @@ module.exports = controller => {
     },
     {
       type: 'get',
+      url: '/user/hhh',
+      routerObj: controller.user.hhh,
+      swaggerObj: {
+        tags: [
+          'user',
+        ],
+        summary: '获取图片',
+        description: '',
+        parameters: [],
+        responses: {
+          200: {
+            description: 'SUCCEED',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  description: 'status',
+                },
+                datas: {
+                  type: 'array',
+                  description: 'result datas',
+                  properties: {
+                    token: {
+                      type: 'string',
+                      description: 'token',
+                    },
+                  },
+                },
+                pageIndex: {
+                  type: 'number',
+                  description: 'pageIndex',
+                },
+                pageSize: {
+                  type: 'number',
+                  description: 'pageSize',
+                },
+                totalCount: {
+                  type: 'number',
+                  description: 'totalCount',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    {
+      type: 'get',
       url: '/user/code',
       routerObj: controller.user.code,
       swaggerObj: {
