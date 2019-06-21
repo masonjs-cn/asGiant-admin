@@ -4,6 +4,7 @@ const Urls = {
   test: 'http://127.0.0.1:7001',
   online: 'http://47.99.191.234:8104',
 };
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const baseUrl = './';
 
@@ -24,6 +25,20 @@ module.exports = {
   // devServer: {
   //   publicPath: baseUrl, // 和 baseUrl 保持一致
   // },
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      return {
+        plugins: [
+
+          new CompressionPlugin({
+            test: /\.js$|\.html$|.\css/, // 匹配文件名
+            threshold: 10240, // 对超过10k的数据压缩
+            deleteOriginalAssets: false, // 不删除源文件
+          }),
+        ],
+      };
+    }
+  },
 
   /* productionSourceMap：{ type:Bollean,default:true } 生产源映射
     如果您不需要生产时的源映射，那么将此设置为false可以加速生产构建 */
