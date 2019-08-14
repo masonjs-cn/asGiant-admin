@@ -20,7 +20,10 @@
     "lint-vue": "vue-cli-service lint",
     "analyz": "npm_config_report=true npm run build",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e"
+    "test:e2e": "vue-cli-service test:e2e",
+    "create-page": "node create-page/create-page.js",
+    "upload-test": "NODE_ENV=test node ./deploy",
+    "upload-prod": "NODE_ENV=prod node ./deploy"
   },
   "egg": {
     "declarations": true
@@ -69,8 +72,10 @@
     "egg-view-ejs": "^2.0.0",
     "eslint": "^5.13.0",
     "eslint-config-egg": "^7.1.0",
+    "inquirer": "^6.5.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "scp2": "^0.5.0",
     "vue-template-compiler": "^2.5.17",
     "webpack-bundle-analyzer": "^3.0.3"
   },
