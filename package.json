@@ -21,6 +21,7 @@
     "await-stream-ready": "^1.0.1",
     "axios": "^0.18.1",
     "babel-polyfill": "^6.26.0",
+    "child_process": "^1.0.2",
     "classlist-polyfill": "^1.2.0",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.0",
